@@ -11,17 +11,15 @@ module.exports = function (app) {
     app.post('/login', (req, res, next) => {
         let success = true;
         let errorMessage;
-		
-			if(!req.fields.username){
+		if(req.fields.username === ''){
 				success = false;
 				errorMessage = 'feltet username er tomt';
-			}	
-		
-		if(!req.fields.passphrase){
+		}
+		if(req.fields.passphrase === ''){
 			success = false;
 			errorMessage = 'feltet passphrase er tomt';	
 		}
-		if(!req.fields.username || !req.fields.passphrase){
+		if(req.fields.username === '' || req.fields.passphrase === ''){
             success = false;
 			errorMessage = 'Et eller flere felter var tomme';
 		}

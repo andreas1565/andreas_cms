@@ -20,10 +20,10 @@ module.exports = function (app) {
     app.post('/dashborad/menu/create', function (req, res) {
         let success = true;
 		let errorMessage;
-        if (req.fields.name === "" || req.fields.postion === '') {
+        /* if (req.fields.name === "" || req.fields.postion === '') {
             success= false;
             errorMessage = 'en eller  et felet er tomet';
-        }
+        } */
         if(req.fields.name  === ''){
             success= false;
             errorMessage = 'feltte navn er tomt';
@@ -31,6 +31,10 @@ module.exports = function (app) {
         if(req.fields.postion === ''){
             success= false;
             errorMessage = 'feltte tomt er tomt';
+        }
+        if(isNaN(req.fields.postion)){
+            success = false;
+            errorMessage.push('du kan kun skrive tal i postion feltet');
         }
         if(success){
             db.query('INSERT INTO `news`.`menu` (`name`, `postion`) VALUES (?, ?);', [req.fields.name, req.fields.postion], function (err, results) {

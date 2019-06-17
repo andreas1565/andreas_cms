@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () =>{
     const message =  document.querySelector('.message');
     function validate(e){
-        if(e.username.value === '' || e.passphrase.value){
+        if(e.username.value === '' || e.passphrase.value === ''){
             e.username.focus();
             e.passphrase.focus();
-            message.innerHTML="Et eller flere felter var tomme";  
+            message.innerHTML="Et eller flere felter var tomme";
+            return false;  
         }
        
         if(e.username.value === ""){
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         }
         
         else{
+            document.querySelector('form').submit();
             return true;
         }
     }

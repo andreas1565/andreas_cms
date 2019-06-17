@@ -9,7 +9,9 @@
         <input type="text" name="postion" value="<%= (typeof postion != 'undefined')? postion: '' %>">
         <button type="submit">oprat menu punkt</button>
         <p><%= (typeof errorMessage != "undefined") ? errorMessage : '' %></p>
+        <p class="message" style="color: green"></p>
     </form>
+    <script src="/js/menu_form_create.js" defer></script>
 </main>
 
 <% include partials/dashborad_afterfooter.ejs %>
