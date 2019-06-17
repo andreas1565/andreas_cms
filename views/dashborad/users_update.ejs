@@ -1,0 +1,56 @@
+<% include partials/dashborad_head.ejs %>
+<% include partials/dashborad_header.ejs %>
+<main id="main">
+    <h1>updater user</h1>
+    <form class="update">
+        <% currents.forEach(current => {%>
+        <input type="hidden" name="id" value="<%=current.id%>">
+        <label for="name">skriv et bruger navn</label>
+        <input disabled name="username" value="<%= current.username %>">
+        <select name="role" style="display:block">
+            <option value="0" disabled selected hidden>vælgusers</option>
+            <%  results.forEach( result => { %>
+            <option value="<%= result.id %>" <%=(current.roles_id==result.id ? 'selected' : '' ) %>>
+                <%=   result.name %>
+            </option>
+            <% }); %>
+        </select>
+        <p class="errorMessage">
+            <%= (typeof errorMessage != "undefined") ? errorMessage : '' %>
+        </p>
+        <button type="submit">opdater buger</button>
+        <% }); %>
+    </form>
+</main>
+<script>
+    const form = document.querySelector('.update');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        fetch('/dashborad/users/', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: this.id.value,
+                    role: this.role.value
+                })
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    document.querySelector('.errorMessage').innerHTML = "Gemt";
+                    document.location.href = "/dashborad/users";
+                    return response.json();
+                }
+                return response.json();
+            }).then(data => {
+                console.log(data);
+                if (data.errorMessage) {
+                    for (let i = 0; i < data.errorMessage.length; i++) {
+                        document.querySelector('.errorMessage').innerHTML += `${data.errorMessage[i]}`;
+                    }
+                } 
+            })
+    });
+</script>
+<% include partials/dashborad_afterfooter.ejs %>
