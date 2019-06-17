@@ -1,0 +1,133 @@
+<% include partials/dashborad_head.ejs %>
+<% include partials/dashborad_header.ejs %>
+<main id="main">
+        <a href="/dashborad/article/create" class="button">opret ny artikel</a>
+    <table>
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    title
+                </th>
+                <th>
+                    billeder
+                </th>
+                <th>
+                    beskrivels
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <% results.forEach(result => { %>
+                    <div class="deletebox"> 
+                            <p>er  du siker på du ville slette</p>
+                            <!-- <button data-id="<%= result.id %>" data-category="article"  class="button-extra  delte">slet</button> -->
+                            <a class="button-extra delete" href="#"  data-category="article" data-id="<%= result.id %>">selt</a>
+                            <button class="button-extra anuller">anuller</button>  
+                        </div>    
+                <td><a href="/dashborad/article/<%= result.id %>" data-id="<%= result.id %>"  class="fas fa-edit updatelink" href="#"></a>
+                    <a class="fas fa-trash-alt  deletebtn "  href="#"></a></td>
+                <td> 
+                    <%= result.title %>
+                </td>
+                <td>
+                    
+                    <img src="/media/<%= result.image %>" alt=""   class="images">
+                </td>
+                <td>
+                    <%= result.description %>
+                </td>
+
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</main>
+<script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+    
+       /*  let deltecategoiresbtn = document.querySelectorAll('.delte');
+        deltecategoiresbtn.forEach(button => {
+            console.log(button.dataset.id);
+            button.addEventListener('click', () => {
+                console.log(`delte cartegrie ${button.dataset.id}`);
+                let data = { id: button.dataset.id }
+
+                // option er  et objekt der  kan man se på krølleparentes
+                let option = {
+                    cache: 'no-cache',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    method: 'delete',
+                    mode: 'cors',
+                    redirect: 'follow',
+                    referrer: 'no-referrer'
+                };
+
+                console.log(option);
+
+
+                // fetch er  en fuction 
+                fetch(`/dashborad/article/${button.dataset.id}`, option) // fetch er at kalde på en adresse med en række options
+                    .then(response => { // then er det svar vi får tilbage
+                        if (response.status === 200) { // 200 betyder "OK"
+                            button.parentElement.parentElement.remove();
+                        }
+                    });
+            });
+        }); */
+         var  box = document.querySelector('.deletebox');
+            var anuller = document.querySelector('.anuller').addEventListener('click', hidenbox); 
+         
+            let delte = document.querySelectorAll(".deletebtn")
+            delte.forEach(deltebtn =>{
+                deltebtn.addEventListener('click', showbox);
+            });
+
+            function showbox(){
+                if(box.style.display !== "block"){ //betyder 'Hvis style.display ikke er block'    !==
+                    box.style.display = "block";  //CSS i Javascript  -   Vil få den usynlige tekst til at blive synlig
+                
+                }	 	
+            };
+
+            function hidenbox(){
+                if(box.style.display !== "none"){ //betyder 'Hvis style.display ikke er block'    !==
+                    box.style.display = "none";  //CSS i Javascript  -   Vil få den usynlige tekst til at blive synlig
+                
+                }
+            }
+        const deleteButtons = document.querySelectorAll('.delete');
+            deleteButtons.forEach(btn => {
+            btn.addEventListener('click',
+            event => {
+
+            const id = event.target.dataset.id;
+
+            const category = event.target.dataset.category;
+
+            fetch(`/dashborad/${category}/${id}`,{
+                        'method': 'DELETE'
+                    
+            })
+
+            .then(response => {
+
+            if (response.status === 200) {
+
+            window.location.reload();
+
+            }
+
+            });
+
+            })
+
+            })
+            });
+</script>
+<% include partials/dashborad_afterfooter.ejs %>

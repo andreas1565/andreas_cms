@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>welcome to the best website on the planet</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <main>
+        <header class="client">
+            <nav>
+                <ul>
+                    <% menuresults.forEach(menuresult => { %>
+                    <li><a href="/category/<%= menuresult.id %>"> <%= menuresult.name %></a></li>
+                    <% }); %>
+                </ul>
+            </nav>
+        </header>
+
+    </main>
+
+    <section>
+        <% results.forEach(result => { %>
+        <h3>
+            <%= result.title %>
+        </h3>
+        <img src="/media/<%= result.image %>"  alt="">
+        <p>
+            <%= result.description %>
+        </p>
+       
+        <% }); %>
+    </section>
+    <script>
+    
+    </script>
+</body>
+
+</html>

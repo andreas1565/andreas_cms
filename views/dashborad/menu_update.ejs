@@ -1,0 +1,83 @@
+<% include partials/dashborad_head.ejs %>
+<% include partials/dashborad_header.ejs %>
+<main id="main">
+    <h1>oprat menu punkt</h1>
+    <form class="update  create">
+        <input type="hidden" name="id" value="<%=results.id%>" >
+        <label for="name">navnet på menu</label>
+        <input type="text" name="name" value="<%= results.name %>">
+        <label for="postion">hvilken rejke fjøle vi du have dem i</label>
+        <input type="text" name="postion" value="<%= results.postion %>">
+        <button type="submit">oprat menu punkt</button>
+        <p class="errorMessage"></p>
+    </form>
+</main>
+
+
+
+<script>
+        const form = document.querySelector('.update');
+    form.addEventListener('submit', function (event) {
+		event.preventDefault();
+		fetch('/dashborad/menu/', {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+                id: this.id.value,
+				name: this.name.value,
+				postion: this.postion.value,
+			})
+		})
+			.then(response => {
+				if (response.status === 204) {
+					document.querySelector('.errorMessage').innerHTML = "Gemt";
+				} else if (response.status === 400) {
+					return response.json();
+				}
+			}).then(data => {
+				document.querySelector('.errorMessage').innerHTML = data.errorMessage;
+			})
+	});
+   /*  const form = document.querySelector(".update");
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        let option = {
+            cache: 'no-cache',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PATCH',
+            mode: 'cors',
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify({
+                name: form.name.value,
+                postion: form.postion.value
+            })
+        };
+
+        const id = window.location.pathname.split('/').pop();
+        const url = `/dashborad/menu/${id}`;
+
+        console.log(option)
+
+        fetch(url, option) // fetch er at kalde på en adresse med en række options
+            .then(response => { // then er det svar vi får tilbage
+                if (response.status === 200) { // 200 betyder "OK"
+                    console.log('ok');
+                    window.location.href = 'http://localhost:1339/dashborad/menu';
+                }
+                return response.json(); 
+            })
+            .then(data =>{
+
+            const text  = document.createTextNode(data.errorMessage);
+            const p = document.createElement('p');
+            form.appendChild(p);
+            p.appendChild(text);
+            })
+    }); */
+</script>
+<% include partials/dashborad_afterfooter.ejs %>

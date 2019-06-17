@@ -1,0 +1,17 @@
+<% include partials/dashborad_head.ejs %>
+<% include partials/dashborad_header.ejs %>
+<main id="main">
+    <h1>oprat menu punkt</h1>
+    <form action="/dashborad/menu/create" class="create" method="post">
+        <label for="name">navnet på menu</label>
+        <input type="text" name="name" value="<%= (typeof name != 'undefined')? name: '' %>">
+        <label for="postion">hvilken rejke fjøle vi du have dem i</label>
+        <input type="text" name="postion" value="<%= (typeof postion != 'undefined')? postion: '' %>">
+        <button type="submit">oprat menu punkt</button>
+        <p><%= (typeof errorMessage != "undefined") ? errorMessage : '' %></p>
+    </form>
+</main>
+
+<% include partials/dashborad_afterfooter.ejs %>
+
+</html>

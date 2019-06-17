@@ -1,0 +1,84 @@
+<% include partials/dashborad_head.ejs %>
+<% include partials/dashborad_header.ejs %>
+<main id="main">
+    <h1>updater article</h1>
+    <form class="update create" enctype="multipart/form-data">
+        <% currents.forEach(current => {%>
+            <input type="hidden" name="id" value="<%=current.id%>" >    
+        <label for="title">navnet på title</label>
+        <input type="text" name="title" value="<%= current.title %>">
+        <img src="/media/<%= current.image %>" class="profileImage"  alt="">
+        <input type="hidden" name="oldimage" value="<%= current.image %>">
+        <label for="file" class="sr-only">upload blide</label>
+        <div id="uploadbutton">
+            <figure>
+                Upload
+            </figure>
+            <input type="file" name="image" id="uploadfield" class="profileFileSelect" data-imageid="<%=current.id%>" >
+        </div>
+        <label for="description">hvilken rejke fjøle vi du have dem i</label>
+        <textarea name="description"  cols="30" rows="10"><%= current.description %></textarea>
+        <!--ternary operator-->
+        <select name="menu" style="display:block">
+            <%  menus.forEach( menu => { %>
+            <option value="<%= menu.id %>" <%= (current.fk_menu==menu.id ? 'selected' : '' ) %>>
+                <%=   menu.name %>
+            </option>
+            <% }); %>
+        </select>
+        <button type="submit">oprat menu punkt</button>
+        <p class="errorMessage"></p>
+        <%}); %>
+    </form>
+</main>
+<script>
+    const form = document.querySelector('.update');
+    form.addEventListener('submit', function (event) {
+		event.preventDefault();
+		fetch('/dashborad/article/', {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+                id: this.id.value,
+				title: this.title.value,
+				description: this.description.value,
+				menu: this.menu.value
+			})
+		})
+			.then(response => {
+				if (response.status === 204) {
+					document.querySelector('.errorMessage').innerHTML = "Gemt";
+                } 
+                return response.json();
+			}).then(data => {
+                console.log(data);
+                if(data.errorMessage){
+                 document.querySelector('.errorMessage').innerHTML = data.errorMessage;
+                }
+			})
+	});
+
+    const file = document.querySelector('.profileFileSelect');
+	file.addEventListener('change', function (event) {
+        const article = event.target.dataset.imageid
+		const formData = new FormData();
+		formData.append('photo', this.files[0]);
+		fetch(`/dashborad/article/image/${article}`, {
+			method: 'PATCH',
+			body: formData
+		})
+			.then(response => response.json())
+			.then(data => {
+				if (data.photo) {
+					const img = document.querySelector('.profileImage');
+					img.src = `/media/${data.photo}`;
+				} else {
+					document.querySelector('.errorMessage').innerHTML = `${data.errorMessages}`;
+
+				}
+			});
+	});
+</script>
+<% include partials/dashborad_afterfooter.ejs %>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>login</title>
+    <style>
+        .login{
+            background: url('/media/login-background.jpg') no-repeat;
+            background-image: cover;
+        }
+        #login{
+        display: flex;
+    }
+    #login form{
+     display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  padding-bottom: 1rem;
+        
+    }
+    form label{
+        font-size: 0.9rem;
+        line-height: 2rem;
+        font-weight: 500;
+        color: #fff;
+    }
+    form input{
+        margin-bottom: 1.3rem;
+  width: 50%;
+  border-radius: 2px;
+  background: #181818;
+  color: #fff;
+  border: 1px solid #555;
+  padding: 0.5rem 1rem;
+  line-height: 1.3rem;
+        
+    }
+   
+    #login section{
+        width: 50%;
+    }
+   section h3, p {
+       color: #fff;
+   } 
+    </style>
+</head>
+
+<body class="login">
+    <main id="login">
+        <form action="/login" method="POST">
+            <label for="username">brugernavn</label>
+            <input type="text" name="username" value="<%= (typeof username != 'undefined')? username: '' %>">
+            <label for="password">password</label>
+            <input type="text" name="passphrase" value="<%= (typeof passphrase != 'undefined')? passphrase: '' %>">
+            <p>
+                <%= (typeof  errorMessage != "undefined") ?  errorMessage : '' %>
+            </p>
+            <button type="submit">login</button>
+        </form>
+        <section>
+            <h3>login og skab dit ejet indhold</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, nobis!</p>
+        </section>
+    </main>
+</body>
+
+</html>
