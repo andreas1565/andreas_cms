@@ -11,11 +11,20 @@ module.exports = function (app) {
     app.post('/login', (req, res, next) => {
         let success = true;
         let errorMessage;
-        if(!req.fields.username || !req.fields.passphrase){
+		
+			if(!req.fields.username){
+				success = false;
+				errorMessage = 'feltet username er tomt';
+			}	
+		
+		if(!req.fields.passphrase){
+			success = false;
+			errorMessage = 'feltet passphrase er tomt';	
+		}
+		if(!req.fields.username || !req.fields.passphrase){
             success = false;
 			errorMessage = 'Et eller flere felter var tomme';
 		}
-
 		if(success){
 			db.query(`SELECT users.id ,users.username ,users.passphrase, users.roles_id,  roles.level  FROM users 
 			INNER JOIN roles
@@ -67,15 +76,22 @@ module.exports = function (app) {
 				success = false;
 				errorMessage = 'Brugernavn er taget';
 			}
-			if (!req.fields.username && !req.fields.passphrase) {
+			if(!req.fields.username){
 				success = false;
-				errorMessage = 'Et eller flere felter var tomme';
-            }
+				errorMessage = 'feltet username er tomt';
+			}
+			if(!req.fields.passphrase){
+				success = false;
+				errorMessage = 'feltet passphrase er tomt';	
+			}
             if(req.fields.passphrase  != req.fields.repeatpassphrase){
                 success = false;
 				errorMessage = 'password match ikkke';
             }
-			
+			if (!req.fields.username || !req.fields.passphrase) {
+				success = false;
+				errorMessage = 'Et eller flere felter var tomme';
+			}
 
 			if (success) {
                 let hashedpassphrase = bcrypt.hashSync( req.fields.passphrase, 10);

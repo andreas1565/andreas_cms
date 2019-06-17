@@ -20,9 +20,17 @@ module.exports = function (app) {
     app.post('/dashborad/menu/create', function (req, res) {
         let success = true;
 		let errorMessage;
-        if (req.fields.name === "" && req.fields.postion === '') {
+        if (req.fields.name === "" || req.fields.postion === '') {
             success= false;
             errorMessage = 'en eller  et felet er tomet';
+        }
+        if(req.fields.name  === ''){
+            success= false;
+            errorMessage = 'feltte navn er tomt';
+        }
+        if(req.fields.postion === ''){
+            success= false;
+            errorMessage = 'feltte tomt er tomt';
         }
         if(success){
             db.query('INSERT INTO `news`.`menu` (`name`, `postion`) VALUES (?, ?);', [req.fields.name, req.fields.postion], function (err, results) {
@@ -54,6 +62,14 @@ module.exports = function (app) {
         if (req.fields.name === "" || req.fields.postion === '') {
             success= false;
             errorMessage = 'en eller  et felet er tomet';
+        }
+        if(req.fields.name  === ''){
+            success= false;
+            errorMessage = 'feltte navn er tomt';
+        }
+        if(req.fields.postion === ''){
+            success= false;
+            errorMessage = 'feltte tomt er tomt';
         }
         if(success){
             db.query(`UPDATE menu SET name = ?, postion = ?  WHERE id =?`, [name, postion, id], function (err, results) {
@@ -244,6 +260,14 @@ module.exports = function (app) {
             success= false;
             errorMessage = 'en eller  et felet er tomet';
         }
+        if(req.fields.title === ''){
+            success= false;
+            errorMessage = 'feltet title er tomet';  
+        }
+        if(req.fields.description === ''){
+            success= false;
+            errorMessage = 'feltet description er tomet';  
+        }
         if(success){
             db.query(`UPDATE article SET title = ?,  description = ?, fk_menu = ? WHERE id = ?`, [req.fields.title,  req.fields.description, req.fields.menu, id], function (err, results) {
                 if (err) {
@@ -284,6 +308,13 @@ module.exports = function (app) {
 		fs.readFile(file.path, (err, data) => {
 			if (err) return next(`${err} at fs.readFile (${__filename}:35:5)`);
 			fs.writeFile(`./public/media/${renamedFilename}`, data, err => {
+                const sql = 'SELECT  image FROM article WHERE id = ?';
+                db.query(sql, [req.params.id], (err, results) => {
+                    fs.unlink(`./public/media/${results[0].image}`, function (err, data) {
+                        if (err) throw err
+
+                    });
+                });
 				if (err) return next(`${err} at fs.writeFile (${__filename}:37:7)`);
 				db.query('UPDATE article SET image = ?  WHERE id = ?', [renamedFilename, req.params.id], (err, result) => {
 					if (err) return next(`${err} at db.query (${__filename}:39:9)`);
