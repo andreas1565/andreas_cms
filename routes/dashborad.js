@@ -1,7 +1,18 @@
 const db = require('../config/mysql')();
 const fs = require('fs');
 module.exports = function (app) {
-
+    app.use('/dashborad', (req, res, next) => {
+        if (!req.session.user) {
+            res.redirect('/login');
+            return;
+            /* if the are not admin user*/ 
+        }
+        else if(req.session.level !== 100 && req.session.level !==  75 && req.session.level !== 110 ){
+            res.redirect('/login')  
+        } else {
+            next();
+        }
+    })
     app.get('/dashborad', (req, res) => {
         res.render('dashborad/dashborad')
     })
