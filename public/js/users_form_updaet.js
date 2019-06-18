@@ -2,14 +2,14 @@ document.addEventListener('DOMContentLoaded', () =>{
     const message =  document.querySelector('.message');
     function validate(e){
        
-        if(e.role.value === '' || isNaN(e.role.value) || e.role.value == '0'){
+        if(e.role.value === '' || isNaN(req.fields.role) || e.role.value == '0'){
             e.role.focus();
             message.innerHTML = 'væg en menu punkt';
             return false;
         }
         return true;
     }
-            const form = document.querySelector('.update');
+            const form = document.querySelector('.update') 
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
                 if(validate(event.target) === true){
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                         } 
                         return response.json();
                     }).then(data => {
-                        console.log(data);
+                        
                         if (data.errorMessage) {
                             for (let i = 0; i < data.errorMessage.length; i++) {
                                 document.querySelector('.errorMessage').innerHTML += `${data.errorMessage[i]}`;

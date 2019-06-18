@@ -1,7 +1,8 @@
 const db = require('../config/mysql')();
+const bcrypt = require('bcryptjs');
 module.exports = function (app) {
      /*------------------------------ //delete session this route rote is for delte a  session  fetback---------------------------------------------------*/  
-   app.get('/dashborad//dashborad/users/session', (req,res) =>{   
+   app.get('/dashborad/dashborad/users/session', (req,res) =>{   
     let fetback;
     delete req.session.fetback;
     db.query(`SELECT users.id, users.username, users.passphrase, roles.name AS usersrole
@@ -10,7 +11,7 @@ module.exports = function (app) {
             ON roles_id = roles.id`, (err, results) => {
             if (err) throw err;
             res.render('dashborad/users', { results,fetback, userlevel: req.session.level });
-            console.log(req.session.level);
+           
         });
    });
     /*------------------------------ this route rote is for delte a  session  fetback end---------------------------------------------------*/ 
@@ -20,7 +21,7 @@ module.exports = function (app) {
         if (typeof req.session.fetback !== 'undefined') {
             //makeingfetback session
             fetback = req.session.fetback;
-            console.log(req.session.fetback);
+           
         }
         db.query(`SELECT users.id, users.username, users.passphrase, roles.name AS usersrole
             FROM users
@@ -28,7 +29,6 @@ module.exports = function (app) {
             ON roles_id = roles.id`, (err, results) => {
             if (err) throw err;
             res.render('dashborad/users', { results,fetback, userlevel: req.session.level });
-            console.log(req.session.level);
         });
     });
 
@@ -53,7 +53,8 @@ module.exports = function (app) {
                         if (err) throw err;
                         res.render('dashborad/users_update', {
                             currents,
-                            results
+                            results,
+                            userlevel: req.session.level
                         });
                     });
                 });
@@ -66,11 +67,12 @@ module.exports = function (app) {
                         if (err) throw err;
                         res.render('dashborad/users_update', {
                             currents,
-                            results
+                            results, 
+                            userlevel: req.session.level
                         });
                     });
                 });  
-            } else{
+            }else{
                 db.query('SELECT * FROM users',  (err, results) =>{
                     if(err){
                         throw err;
@@ -84,7 +86,6 @@ module.exports = function (app) {
     });
 
     app.patch('/dashborad/users/', function (req, res) {
-        if(req.session.level == 110 || req.session.level === 100){
             let id = req.fields.id;
             req.session.fetback = 'du har nye opdater en da din brugers roler';
             let success = true;
@@ -107,8 +108,7 @@ module.exports = function (app) {
                 res.json({
                     errorMessage
                 })
-            }   
-        }
+            }
     });
     /*------------------------------ delete users -------------------------------------------------------------------------------------*/
     app.delete('/dashborad/users/:id', function (req, res) {
@@ -133,5 +133,44 @@ module.exports = function (app) {
                     res.end();
             }
         });
+    });
+     /*------------------------------ get single user so they can change password -------------------------------------------------------------------------------------*/
+     app.get('/dashborad/user/change/password/:id', function (req, res) {
+        let id = req.params.id;
+        db.query('SELECT * FROM users WHERE id =  ?', [id], function (err, results) {
+            if (err) throw err;
+            res.render('dashborad/user_change_password', { 'results': results[0] });
+        });
+    });
+     /*------------------------------ get single user so they can change password end -------------------------------------------------------------------------------------*/
+     app.patch('/dashborad/user', function (req, res) {
+        let idpassword = req.fields.idpassword;
+        let success = true;
+        let errorMessage;
+        /* here i am making a  sesion text for the fetback sesion*/ 
+        req.session.fetback = 'du har  opdatert dit password';
+
+		if(req.fields.passphrase === ''){
+            success = false;
+            errorMessage = 'feltet passphrase er tomt';	
+        }
+         if(req.fields.repeatpassphrase === ''){
+            success = false;
+            errorMessage = 'feltet repeatpassphrase er tomt';	
+        }
+        if(success){
+            let hashedpassphrase = bcrypt.hashSync(req.fields.passphrase, 10);
+            db.query('UPDATE users SET passphrase = ?  WHERE id = ?', [hashedpassphrase, idpassword], function (err, results) {
+                if (err) {
+                    throw err;
+                }
+    
+                res.json({ successful: true })
+            }) 
+        }else{
+            res.status('400');
+            res.json({errorMessage}) 
+        }
+        
     });
 }
