@@ -1,0 +1,104 @@
+<% include partials/dashborad_head.ejs %>
+<% include partials/dashborad_header.ejs %>
+<main id="main">
+    <% if(typeof fetback != 'undefined'){ %>
+    <p id="updatemessage">
+        <%= (typeof fetback != 'undefined')? fetback: '' %> <a href="/dashborad//dashborad/users/session">X</a></p>
+    <% } %>
+    <table>
+        <thead>
+            <tr>
+                <% if( userlevel == 110 || userlevel == 100){ %> 
+                    <th>
+
+                    </th>
+                <% } %>
+                <th>
+                    brugernavn
+                </th>
+                <th>
+                    brugerroller
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <% results.forEach(result => { %>
+                <div class="deletebox">
+                    <p>er du siker på du ville slette</p>
+                    <a class="button-extra delete" href="#" data-id="<%= result.id %>">selt</a>
+                    <button class="button-extra anuller">anuller</button>
+                </div>
+                <% if(  userlevel == 110 || userlevel == 100){ %> 
+                    <td><a href="/dashborad/users/<%= result.id %>" data-id="<%= result.id %>" class="fas fa-edit updatelink"></a>
+                        <a class="fas fa-trash-alt  deletebtn " href="#"></a></td>
+                <%  }%>     
+                <td>
+                    <%= result.username %>
+                </td>
+                <td>
+                    <%= result.usersrole %>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <div class="dangermessage errorMessage"></div>
+    <p class="errorMessage">
+            <%= (typeof dangermessage != "undefined") ? dangermessage : '' %>
+        </p>
+</main>
+<script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+        var box = document.querySelectorAll('.deletebox');
+        var anuller = document.querySelectorAll('.anuller');
+
+        let delte = document.querySelectorAll(".deletebtn")
+        for (let i = 0; i < delte.length; i++) {
+            delte[i].addEventListener('click', function () {
+                if (box[i].style.display !== "block") { //betyder 'Hvis style.display ikke er block'    !==
+                    box[i].style.display = "block"; //CSS i Javascript  -   Vil få den usynlige tekst til at blive synlig
+                }
+            });
+        }
+
+        for (let i = 0; i < anuller.length; i++) {
+            anuller[i].addEventListener('click', function () {
+                if (box[i].style.display !== "none") { //betyder 'Hvis style.display ikke er block'    !==
+                    box[i].style.display = "none"; //CSS i Javascript  -   Vil få den usynlige tekst til at blive synlig
+
+                }
+            });
+        }
+
+        /*   function hidenbox(){
+              
+          } */
+        const deleteButtons = document.querySelectorAll('.delete');
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click',
+                event => {
+                    const id = event.target.dataset.id;
+                    console.log(id);
+                    fetch(`/dashborad/users/${id}`, {
+                            'method': 'DELETE'
+                        })
+                        .then(response => {
+
+                            if (response.status === 200) {
+
+                                window.location.reload();
+
+                            }else if(response.status === 401) {
+                                document.querySelector('.dangermessage').innerHTML = 'du har ikke de rigtige level til at kunne slette'; 
+
+                            }
+
+                        });
+
+                })
+
+        })
+    });
+</script>
+<% include partials/dashborad_afterfooter.ejs %>

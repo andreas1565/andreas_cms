@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form test</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="login">
+    <main id="login">
+        <form action="/signup" method="post">
+            <label for="username">username</label>
+            <input type="text" name="username">
+            <label for="password">passphrase</label>
+            <input type="password" name="passphrase" value="<%= (typeof passphrase != 'undefined')? passphrase: '' %>">
+            <label for="password">repeatpassphrase</label>
+            <input type="password" name="repeatpassphrase" value="<%= (typeof repeatpassphrase != 'undefined')? repeatpassphrase: '' %>">
+            <button type="submit">oprat brger</button>
+            <p>
+                <%= (typeof errorMessage != "undefined") ? errorMessage : '' %>
+            </p>
+        </form>
+        <section>
+            <h3>login og skab dit ejet indhold</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, nobis!</p>
+        </section>
+    </main>
+    <p class="message"></p>
+    <script src="/js/signup_form.js" defer></script>
+</body>
+
+</html>

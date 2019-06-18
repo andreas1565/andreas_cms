@@ -1,6 +1,10 @@
 <% include partials/dashborad_head.ejs %>
 <% include partials/dashborad_header.ejs %>
 <main id="main">
+        <% if(typeof fetback != 'undefined'){ %>
+            <p id="updatemessage">
+                <%= (typeof fetback != 'undefined')? fetback: '' %> <a href="/dashborad/article/session">X</a></p>
+        <% } %>
         <a href="/dashborad/article/create" class="button">opret ny artikel</a>
     <table>
         <thead>
@@ -25,11 +29,14 @@
                     <div class="deletebox"> 
                             <p>er  du siker på du ville slette</p>
                             <!-- <button data-id="<%= result.id %>" data-category="article"  class="button-extra  delte">slet</button> -->
-                            <a class="button-extra delete" href="#"  data-category="article" data-id="<%= result.id %>">selt</a>
+                            <a class="button-extra delete" href="#"  data-id="<%= result.id %>">selt</a>
                             <button class="button-extra anuller">anuller</button>  
                         </div>    
                 <td><a href="/dashborad/article/<%= result.id %>" data-id="<%= result.id %>"  class="fas fa-edit updatelink" href="#"></a>
-                    <a class="fas fa-trash-alt  deletebtn "  href="#"></a></td>
+                    <% if( userlevel == 100 || userlevel == 110){ %>
+
+                        <a class="fas fa-trash-alt  deletebtn " href="#"></a></td>
+                    <%  }%>
                 <td> 
                     <%= result.title %>
                 </td>
@@ -45,6 +52,7 @@
             <% }); %>
         </tbody>
     </table>
+    <p class="dangermessage"></p>
 </main>
 <script defer>
     document.addEventListener('DOMContentLoaded', () => {
@@ -80,54 +88,56 @@
                     });
             });
         }); */
-         var  box = document.querySelector('.deletebox');
-            var anuller = document.querySelector('.anuller').addEventListener('click', hidenbox); 
-         
-            let delte = document.querySelectorAll(".deletebtn")
-            delte.forEach(deltebtn =>{
-                deltebtn.addEventListener('click', showbox);
-            });
+        var box = document.querySelectorAll('.deletebox');
+        var anuller = document.querySelectorAll('.anuller');
 
-            function showbox(){
-                if(box.style.display !== "block"){ //betyder 'Hvis style.display ikke er block'    !==
-                    box.style.display = "block";  //CSS i Javascript  -   Vil få den usynlige tekst til at blive synlig
-                
-                }	 	
-            };
-
-            function hidenbox(){
-                if(box.style.display !== "none"){ //betyder 'Hvis style.display ikke er block'    !==
-                    box.style.display = "none";  //CSS i Javascript  -   Vil få den usynlige tekst til at blive synlig
-                
+        let delte = document.querySelectorAll(".deletebtn")
+        for (let i = 0; i < delte.length; i++) {
+            delte[i].addEventListener('click', function () {
+                if (box[i].style.display !== "block") { //betyder 'Hvis style.display ikke er block'    !==
+                    box[i].style.display = "block"; //CSS i Javascript  -   Vil få den usynlige tekst til at blive synlig
                 }
-            }
+            });
+        }
+
+        for (let i = 0; i < anuller.length; i++) {
+            anuller[i].addEventListener('click', function () {
+                if (box[i].style.display !== "none") { //betyder 'Hvis style.display ikke er block'    !==
+                    box[i].style.display = "none"; //CSS i Javascript  -   Vil få den usynlige tekst til at blive synlig
+
+                }
+            });
+        }
         const deleteButtons = document.querySelectorAll('.delete');
-            deleteButtons.forEach(btn => {
+        deleteButtons.forEach(btn => {
             btn.addEventListener('click',
-            event => {
+                event => {
 
-            const id = event.target.dataset.id;
+                    const id = event.target.dataset.id;
 
-            const category = event.target.dataset.category;
 
-            fetch(`/dashborad/${category}/${id}`,{
+
+                    fetch(`/dashborad/article/${id}`,{
                         'method': 'DELETE'
                     
-            })
+                        })
 
-            .then(response => {
+                        .then(response => {
 
-            if (response.status === 200) {
+                            if (response.status === 200) {
 
-            window.location.reload();
+                                window.location.reload();
 
-            }
+                            }  else if(response.status === 401) {
+                             document.querySelector('.dangermessage').innerHTML = 'du har ikke de rigtige level til at kunne slette'; 
 
-            });
+                            }
 
-            })
+                        });
 
-            })
+                })
+
+        })
             });
 </script>
 <% include partials/dashborad_afterfooter.ejs %>

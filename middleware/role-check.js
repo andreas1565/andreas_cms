@@ -2,32 +2,32 @@ module.exports = (function(){
     function loggedIn(session){
         if(!session){
             return false;
-            return session.user && session.role;
+            return  session.level;
         }
     }
 
     function  superadmins(req,res,next){
-        if(!loggedIn(req.session) || !req.session.role >= 100){
+        if(!loggedIn(req.session) || !req.session.level >= 100){
             return res.redirect('/login')
         }
         next();
     }
 
     function  admins(req,res,next){
-        if(!loggedIn(req.session) || !req.session.role >= 100 && ! req.session.role <100){
+        if(!loggedIn(req.session) || !req.session.level >= 100 && ! req.session.level <100){
             return res.redirect('/login')
         }
         next();
     }
     function  moderators(req,res,next){
-        if(!loggedIn(req.session) || !req.session.role >= 75 && ! req.session.role < 75){
+        if(!loggedIn(req.session) || !req.session.level >= 75 && ! req.session.level < 75){
             return res.redirect('/login')
         }
         next();
     }
 
     function  user(req,res,next){
-        if(!loggedIn(req.session) || !req.session.role >= 25 && ! req.session.role < 25){
+        if(!loggedIn(req.session) || !req.session.level >= 25 && ! req.session.level < 25){
             return res.redirect('/login')
         }
         next();

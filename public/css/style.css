@@ -138,6 +138,7 @@ td {
     margin: 4px 2px;
     cursor: pointer;
     margin-left: 80%;
+    margin-top: 1%;
 }
 /*update box delete button*/
 #uploadfield{
@@ -210,6 +211,31 @@ cursor: pointer;
     cursor: pointer;
 }
 
+#updatemessage{
+    background: #0F0;
+    padding: 1em;
+    border-radius: 2em;
+    margin-top: 1%;
+}
+
+#updatemessage a{
+    float: right;
+    cursor: pointer;
+    margin-right: 1em;
+    color: #f00;
+    text-decoration: none;
+}
+.errorMessage{
+    color: #f00;
+}
+
+.deletebtn{
+    color: #f00;
+}
+.deletebtn:hover{
+    color: #f00;
+}
+
 @media screen and (max-width: 800px) {
     .button {
         margin-left: 60%;
@@ -274,3 +300,36 @@ cursor: pointer;
     border: none;
     font-size: 1.2em;
 }
+
+/*----------------------------------------------for the login form---------------------------------------------------------------------------------------------------*/
+#login{
+    display: flex;
+    }
+    #login form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding-bottom: 1rem;
+    
+    }
+    form label{
+    font-size: 0.9rem;
+    line-height: 2rem;
+    font-weight: 500;
+    color: #000;
+    }
+    form input{
+        width: 50%;;
+        padding: 12px 20px;
+        margin: 8px 0;
+    
+    }
+    #login section{
+    width: 50%;
+    }
+    section h3, p {
+    color: #000;
+    }
+/*----------------------------------------------for the login form end----------------------------------------------------------------------------------------------*/

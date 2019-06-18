@@ -10,13 +10,14 @@
         <input type="text" name="postion" value="<%= results.postion %>">
         <button type="submit">oprat menu punkt</button>
         <p class="errorMessage"></p>
+        <p class="message"></p>
     </form>
 </main>
 
 
-
+<script src="/js/menu_formupdaet.js" defer></script>
 <script>
-        const form = document.querySelector('.update');
+    /* const form = document.querySelector('.update');
     form.addEventListener('submit', function (event) {
 		event.preventDefault();
 		fetch('/dashborad/menu/', {
@@ -39,7 +40,7 @@
 			}).then(data => {
 				document.querySelector('.errorMessage').innerHTML = data.errorMessage;
 			})
-	});
+	}); */
    /*  const form = document.querySelector(".update");
     form.addEventListener('submit', event => {
         event.preventDefault();

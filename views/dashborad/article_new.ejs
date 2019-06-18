@@ -1,31 +1,34 @@
 <% include partials/dashborad_head.ejs %>
 <% include partials/dashborad_header.ejs %>
 <main id="main">
-    <h1>oprat menu punkt</h1>
+    <h1>oprat ny articl</h1>
     <form action="/dashborad/article/create" method="POST" class="create" enctype="multipart/form-data">
         <label for="name">skriv en title på din artikel</label>
         <input type="text" name="title" value="<%= (typeof title != 'undefined')? title: '' %>">
         <label for="image">upload billede til din artikel</label>
         <div id="uploadbutton">
-            <figure>
-                Upload
-            </figure>
-            <input type="file" name="image" id="uploadfield" value="<%= (typeof title != 'undefined')? title: '' %>">
-        </div>
+                <figure>
+                    Upload
+                </figure>
+                <input type="file" name="image" id="uploadfield" value="<%= (typeof image != 'undefined')? image: '' %>">
+            </div>
         <label for="description">text til din artikel</label>
         <textarea name="description"  cols="30" rows="10">
             <%= (typeof description != 'undefined')? description: '' %> 
         </textarea>
         <select name="menu" style="display:block">
             <% menus.forEach(menu => { %>
+            <option value="0" disabled selected hidden>vælg et menu puknt</option>    
             <option value="<%= menu.id %>">
                 <%=  menu.name %>
             </option>
             <% }); %>
         </select>
         <p><%= (typeof errorMessage != "undefined") ? errorMessage : '' %></p>
+        <p class="message" style="color: green"></p>
         <button type="submit">oprat article</button>
     </form>
 </main>
+<script src="/js/article_form_create.js" defer></script>
 </body>
 <% include partials/dashborad_afterfooter.ejs %>

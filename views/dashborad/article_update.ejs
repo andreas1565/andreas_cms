@@ -14,13 +14,14 @@
             <figure>
                 Upload
             </figure>
-            <input type="file" name="image" id="uploadfield" class="profileFileSelect" data-imageid="<%=current.id%>" >
+            <input type="file" name="photo" id="uploadfield" class="profileFileSelect" data-imageid="<%=current.id%>" >
         </div>
         <label for="description">hvilken rejke fjøle vi du have dem i</label>
         <textarea name="description"  cols="30" rows="10"><%= current.description %></textarea>
         <!--ternary operator-->
         <select name="menu" style="display:block">
             <%  menus.forEach( menu => { %>
+                <option value="0">vælg et menupunkt</option>
             <option value="<%= menu.id %>" <%= (current.fk_menu==menu.id ? 'selected' : '' ) %>>
                 <%=   menu.name %>
             </option>
@@ -28,11 +29,13 @@
         </select>
         <button type="submit">oprat menu punkt</button>
         <p class="errorMessage"></p>
+        <p class="message" style="color: green"></p>
         <%}); %>
     </form>
 </main>
+<script src="/js/article_form_update.js"></script>
 <script>
-    const form = document.querySelector('.update');
+/*     const form = document.querySelector('.update');
     form.addEventListener('submit', function (event) {
 		event.preventDefault();
 		fetch('/dashborad/article/', {
@@ -79,6 +82,6 @@
 
 				}
 			});
-	});
+	}); */
 </script>
 <% include partials/dashborad_afterfooter.ejs %>
