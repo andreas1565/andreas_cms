@@ -18,7 +18,7 @@
         </textarea>
         <select name="menu" style="display:block">
             <% menus.forEach(menu => { %>
-            <option value="0">vælg et menu puknt</option>    
+            <option value="0" disabled selected hidden>vælg et menu puknt</option>    
             <option value="<%= menu.id %>">
                 <%=  menu.name %>
             </option>

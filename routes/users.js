@@ -1,5 +1,19 @@
 const db = require('../config/mysql')();
 module.exports = function (app) {
+     /*------------------------------ //delete session this route rote is for delte a  session  fetback---------------------------------------------------*/  
+   app.get('/dashborad//dashborad/users/session', (req,res) =>{   
+    let fetback;
+    delete req.session.fetback;
+    db.query(`SELECT users.id, users.username, users.passphrase, roles.name AS usersrole
+            FROM users
+            INNER JOIN roles
+            ON roles_id = roles.id`, (err, results) => {
+            if (err) throw err;
+            res.render('dashborad/users', { results,fetback, userlevel: req.session.level });
+            console.log(req.session.level);
+        });
+   });
+    /*------------------------------ this route rote is for delte a  session  fetback end---------------------------------------------------*/ 
     /*------------------------------//select all users  select all users --------------------------------------------------------------------------------*/
     app.get('/dashborad/users', (req, res) => {
         let fetback;

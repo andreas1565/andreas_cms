@@ -1,6 +1,10 @@
 <% include partials/dashborad_head.ejs %>
 <% include partials/dashborad_header.ejs %>
 <main id="main">
+        <% if(typeof fetback != 'undefined'){ %>
+            <p id="updatemessage">
+                <%= (typeof fetback != 'undefined')? fetback: '' %> <a href="/dashborad/article/session">X</a></p>
+        <% } %>
         <a href="/dashborad/article/create" class="button">opret ny artikel</a>
     <table>
         <thead>
@@ -29,7 +33,10 @@
                             <button class="button-extra anuller">anuller</button>  
                         </div>    
                 <td><a href="/dashborad/article/<%= result.id %>" data-id="<%= result.id %>"  class="fas fa-edit updatelink" href="#"></a>
-                    <a class="fas fa-trash-alt  deletebtn "  href="#"></a></td>
+                    <% if( userlevel == 100 || userlevel == 110){ %>
+
+                        <a class="fas fa-trash-alt  deletebtn " href="#"></a></td>
+                    <%  }%>
                 <td> 
                     <%= result.title %>
                 </td>
@@ -45,6 +52,7 @@
             <% }); %>
         </tbody>
     </table>
+    <p class="dangermessage"></p>
 </main>
 <script defer>
     document.addEventListener('DOMContentLoaded', () => {

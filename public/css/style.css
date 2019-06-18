@@ -138,6 +138,7 @@ td {
     margin: 4px 2px;
     cursor: pointer;
     margin-left: 80%;
+    margin-top: 1%;
 }
 /*update box delete button*/
 #uploadfield{
@@ -208,6 +209,31 @@ cursor: pointer;
 #uploadbutton>input{
     opacity: 0;
     cursor: pointer;
+}
+
+#updatemessage{
+    background: #0F0;
+    padding: 1em;
+    border-radius: 2em;
+    margin-top: 1%;
+}
+
+#updatemessage a{
+    float: right;
+    cursor: pointer;
+    margin-right: 1em;
+    color: #f00;
+    text-decoration: none;
+}
+.errorMessage{
+    color: #f00;
+}
+
+.deletebtn{
+    color: #f00;
+}
+.deletebtn:hover{
+    color: #f00;
 }
 
 @media screen and (max-width: 800px) {
