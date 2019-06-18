@@ -1,49 +1,38 @@
 document.addEventListener('DOMContentLoaded', () =>{
     const message =  document.querySelector('.message');
     function validate(e){
-       if(e.name.value === '' || e.postion.value === ''){
-        e.name.focus();
-        message.innerHTML="en elller flere felter er tom";
-        return false;
-       }
-        if(e.name.value === ""){
-            e.name.focus();
-            message.innerHTML="skive noget i nave felete";
+        if(e.passphrase.value === ""){
+            e.passphrase.focus();
+            message.innerHTML=" feltet passphrase er tomt";
             return false;
         }
-        if(e.postion.value === ""){
-            e.postion.focus();
-            message.innerHTML=" skive noget i pris felete";
-            return false;
-        }
-        if(isNaN(e.postion.value)){
-            e.postion.focus();
-            message.innerHTML=" du kan kun skive tal  ipris felete ";
+        if(e.passphrase.value != e.repeatpassphrase.value){
+            e.passphrase.focus();
+            e.repeatpassphrase.focus();
+            message.innerHTML = "password er ikke ens"
             return false;
         }
             return true;
     }
-
-    
-            const form = document.querySelector('.update');
+            const form = document.querySelector('.updatepassword');
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
                 if(validate(event.target) === true){
-                fetch('/dashborad/menu/', {
+                fetch('/dashborad/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        id: this.id.value,
-                        name: this.name.value,
-                        postion: this.postion.value,
+                        idpassword: this.idpassword.value,
+                        passphrase: this.passphrase.value,
+                        repeatpassphrase: this.repeatpassphrase.value
                     })
                 })
                     .then(response => {
                         if (response.status === 200) {
                             document.querySelector('.errorMessage').innerHTML = "Gemt";
-                            document.location.href="/dashborad/menu/"
+                            document.location.href="/dashborad/users"
                         } 
                         return response.json();
                     }).then(data => {

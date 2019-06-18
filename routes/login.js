@@ -36,6 +36,7 @@ module.exports = function (app) {
 					if(bcrypt.compareSync(req.fields.passphrase, result[0].passphrase)){
 						req.session.user = result[0].id;
 						app.locals.username = result[0].username;
+						app.locals.profileID = result[0].id;
 						req.session.roles_id = result[0].roles_id;
 						req.session.level = result[0].level;
 						app.locals.login = true;
@@ -51,7 +52,7 @@ module.exports = function (app) {
 			});
 		}else{
 			res.render('login',{errorMessage, ...req.fields});
-			console.log(errorMessage);
+			
 		}
     });
 	
@@ -95,7 +96,6 @@ module.exports = function (app) {
                 let hashedpassphrase = bcrypt.hashSync( req.fields.passphrase, 10);
 				db.query('INSERT INTO users (username, passphrase, roles_id) VALUES (?, ?, 10);', [req.fields.username, hashedpassphrase], (err, results) => {
                     if (err) throw err;
-                    console.log(results);
                     res.redirect('/login');
 				});
 			} else {

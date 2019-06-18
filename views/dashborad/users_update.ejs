@@ -2,6 +2,7 @@
 <% include partials/dashborad_header.ejs %>
 <main id="main">
     <h1>updater user</h1>
+    <% if( userlevel == 100 || userlevel == 110){ %> 
     <form class="update">
         <% currents.forEach(current => {%>
         <input type="hidden" name="id" value="<%=current.id%>">
@@ -22,8 +23,25 @@
         <button type="submit">opdater buger</button>
         <% }); %>
     </form>
+    <% } %>
+    <% if( userlevel == 110){ %> 
+            <% currents.forEach(current => {%>
+                <form class="updatepassword">
+                        <input type="hidden" name="idpassword" value="<%= current.id %>">
+                        <label for="password">passphrase</label>
+                        <input type="password" name="passphrase">
+                        <label for="password">repeatpassphrase</label>
+                        <input type="password" name="repeatpassphrase" >
+                        <button type="submit">opdater password</button>
+                        <p class="errorMessage"></p>
+                    <p class="message"></p>
+                    </form>
+                    <script src="/js/users_form_change_password.js"></script>
+            <% }); %>  
+    <% } %>    
 </main>
 <script src="/js/users_form_updaet.js"></script>
+
 <script>
   /*   const form = document.querySelector('.update');
     form.addEventListener('submit', function (event) {

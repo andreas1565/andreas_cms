@@ -3,7 +3,7 @@
 <main id="main">
     <% if(typeof fetback != 'undefined'){ %>
     <p id="updatemessage">
-        <%= (typeof fetback != 'undefined')? fetback: '' %> <a href="/dashborad//dashborad/users/session">X</a></p>
+        <%= (typeof fetback != 'undefined')? fetback: '' %> <a href="/dashborad/dashborad/users/session">X</a></p>
     <% } %>
     <table>
         <thead>
@@ -19,6 +19,9 @@
                 <th>
                     brugerroller
                 </th>
+                <th>
+                    <a href="/dashborad/user/change/password/<%= profileID %>">opdater password</a>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -29,10 +32,11 @@
                     <a class="button-extra delete" href="#" data-id="<%= result.id %>">selt</a>
                     <button class="button-extra anuller">anuller</button>
                 </div>
-                <% if(  userlevel == 110 || userlevel == 100){ %> 
+             
                     <td><a href="/dashborad/users/<%= result.id %>" data-id="<%= result.id %>" class="fas fa-edit updatelink"></a>
+                        <% if( userlevel == 110 || userlevel == 100){ %> 
                         <a class="fas fa-trash-alt  deletebtn " href="#"></a></td>
-                <%  }%>     
+                        <%  }%>     
                 <td>
                     <%= result.username %>
                 </td>
