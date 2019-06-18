@@ -31,19 +31,6 @@ module.exports = function (app) {
         FROM users
         INNER JOIN roles
         ON roles_id = roles.id`, [id], (err, result1) =>{
-            console.log(result1[0]);
-            
-
-            /* if (req.session.level <= result1[0].level || !req.session.level ) {
-                fetback = req.session.fetback;
-                 db.query(`SELECT users.id, users.username, users.passphrase, roles.name AS usersrole, roles.level AS \`level\`
-                    FROM users
-                    INNER JOIN roles
-                    ON roles_id = roles.id`, (err, results) => {
-                    if (err) throw err;
-                    res.render('dashborad/users', { results, fetback, userlevel: req.session.level });
-                     });
-            } */
             if(req.session.level ==  110){ // Super Admin
                 db.query('SELECT * FROM users WHERE id =  ?', [id], function (err, results) {
                     if (err) throw err;
@@ -82,7 +69,33 @@ module.exports = function (app) {
         
     });
 
-
+    app.patch('/dashborad/users/', function (req, res) {
+        if(req.session.level == 110 || req.session.level === 100){
+            let id = req.fields.id;
+            req.session.fetback = 'du har nye opdater en da din brugers roler';
+            let success = true;
+            let errorMessage = [];  
+            if (!req.fields.role || isNaN(req.fields.role) || req.fields.role == "0") {
+                success = false;
+                errorMessage.push('skiv  navn på en kategorie');
+            }
+            if (success) {
+                db.query('UPDATE users SET  roles_id = ? WHERE (id = ?)', [req.fields.role, id], function (err, results) {
+                    if (err) {
+                        throw err;
+                    }
+                    res.json({
+                        successful: true
+                    });
+                })
+            } else {
+                res.status('400');
+                res.json({
+                    errorMessage
+                })
+            }   
+        }
+    });
     /*------------------------------ delete users -------------------------------------------------------------------------------------*/
     app.delete('/dashborad/users/:id', function (req, res) {
         let id = req.params.id;

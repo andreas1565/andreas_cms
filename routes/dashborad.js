@@ -20,10 +20,10 @@ module.exports = function (app) {
     app.post('/dashborad/menu/create', function (req, res) {
         let success = true;
 		let errorMessage;
-        /* if (req.fields.name === "" || req.fields.postion === '') {
+        if (req.fields.name === "" || req.fields.postion === '') {
             success= false;
             errorMessage = 'en eller  et felet er tomet';
-        } */
+        }
         if(req.fields.name  === ''){
             success= false;
             errorMessage = 'feltte navn er tomt';
@@ -141,6 +141,21 @@ module.exports = function (app) {
         if(req.files.image.name === ''){
             errorMessage = 'der er igen file med formular';
 			success = false; 
+        }
+        if(req.fields.description === ''){
+            errorMessage = 'felte beskrive er  tomt';
+			success = false; 
+        }
+        if (!req.fields.menu || isNaN(req.fields.menu) || req.fields.menu == "0") {
+            success = false;
+            errorMessage.push('vælg en salg');
+        }
+        if(req.fields.description[0] == " "){
+            while(req.fields.description[0] === " ") {
+                req.fields.description = req.fields.description.slice(1);
+            }
+            success = false;
+            errorMessage.push('ingen mellemrum');
         }
          if(success === true){
             fs.readFile(req.files.image.path, function (err, data) {
@@ -272,6 +287,17 @@ module.exports = function (app) {
             success= false;
             errorMessage = 'feltet description er tomet';  
         }
+        if (!req.fields.menu || isNaN(req.fields.menu) || req.fields.menu == "0") {
+            success = false;
+            errorMessage ='vælg et menupunkt'
+        }
+        if(req.fields.description[0] == " "){
+            while(req.fields.description[0] === " ") {
+                req.fields.description = req.fields.description.slice(1);
+            }
+            success = false;
+            errorMessage = 'ingen mellemrum';
+        }
         if(success){
             db.query(`UPDATE article SET title = ?,  description = ?, fk_menu = ? WHERE id = ?`, [req.fields.title,  req.fields.description, req.fields.menu, id], function (err, results) {
                 if (err) {
@@ -298,7 +324,7 @@ module.exports = function (app) {
 			errorMessage = 'du har ikke valgt en korat fil type';
 			success = false;
         }
-        if(fille.size > process.env.max_file_upload){
+        if(file.size > process.env.max_file_upload){
             errorMessage = 'filen må max fulde 2mb';
 			success = false;
         }

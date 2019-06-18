@@ -8,7 +8,7 @@
         <label for="name">skriv et bruger navn</label>
         <input disabled name="username" value="<%= current.username %>">
         <select name="role" style="display:block">
-            <option value="0" disabled selected hidden>vælgusers</option>
+            <option value="0" disabled hidden selected>vælgusers</option>
             <%  results.forEach( result => { %>
             <option value="<%= result.id %>" <%=(current.roles_id==result.id ? 'selected' : '' ) %>>
                 <%=   result.name %>
@@ -18,12 +18,14 @@
         <p class="errorMessage">
             <%= (typeof errorMessage != "undefined") ? errorMessage : '' %>
         </p>
+        <p class="message" style="color: green"></p>
         <button type="submit">opdater buger</button>
         <% }); %>
     </form>
 </main>
+<script src="/js/users_form_updaet.js"></script>
 <script>
-    const form = document.querySelector('.update');
+  /*   const form = document.querySelector('.update');
     form.addEventListener('submit', function (event) {
         event.preventDefault();
         fetch('/dashborad/users/', {
@@ -51,6 +53,6 @@
                     }
                 } 
             })
-    });
+    }); */
 </script>
 <% include partials/dashborad_afterfooter.ejs %>
