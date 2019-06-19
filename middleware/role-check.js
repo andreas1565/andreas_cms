@@ -1,13 +1,15 @@
 module.exports = (function(){
+    // check for session
     function loggedIn(session){
         if(!session){
             return false;
-            return  session.level;
         }
+        return  session.level;
     }
 
     function  superadmins(req,res,next){
-        if(!loggedIn(req.session) || !req.session.level >= 100){
+        // hvis du ikke er log in eller hvis dit level ikke er højt nok
+        if(!loggedIn(req.session) || !req.session.level >= 110){
             return res.redirect('/login')
         }
         next();

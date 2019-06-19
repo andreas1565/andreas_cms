@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             message.innerHTML=" skive noget i beskrivseles felete";
             return false;
         }
-        if(e.menu.value === '' ||isNaN(req.fields.role) || e.menu.value == '0'){
+        if(e.menu.value === '' || isNaN(e.menu.value) || e.menu.value == '0'){
             e.menu.focus();
             message.innerHTML = 'væg en menu punkt';
             return false;

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const message =  document.querySelector('.message');
     function validate(e){
        
-        if(e.role.value === '' || isNaN(req.fields.role) || e.role.value == '0'){
+        if(e.role.value === '' || isNaN(e.role.value) || e.role.value == '0'){
             e.role.focus();
             message.innerHTML = 'væg en menu punkt';
             return false;
