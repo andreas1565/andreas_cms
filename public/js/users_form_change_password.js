@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', () =>{
             return true;
     }
             const form = document.querySelector('.updatepassword');
+            const endpoint = form.getAttribute('action');
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
                 if(validate(event.target) === true){
-                fetch('/dashborad/user', {
+                fetch(endpoint, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'

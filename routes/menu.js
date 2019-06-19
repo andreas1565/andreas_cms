@@ -67,8 +67,8 @@ module.exports = function (app) {
         });
     });
 
-    app.patch('/dashborad/menu/',  [checkrole.admins, checkrole.superadmins, checkrole.moderators], function (req, res) {
-        let id = req.fields.id;
+    app.patch('/dashborad/menu/:id',  [checkrole.admins, checkrole.superadmins, checkrole.moderators], function (req, res) {
+        let id = req.params.id;
         const name = req.fields.name;
         const postion = req.fields.postion;
         req.session.fetback = 'du har  opdatert et menupunkt';

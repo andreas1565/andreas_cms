@@ -3,8 +3,8 @@
 <main id="main">
     <h1>updater user</h1>
     <% if( userlevel == 100 || userlevel == 110){ %> 
-    <form class="update">
-        <% currents.forEach(current => {%>
+    <% currents.forEach(current => {%>   
+    <form class="update" action="/dashborad/users/<%= current.id %>">   
         <input type="hidden" name="id" value="<%=current.id%>">
         <label for="name">skriv et bruger navn</label>
         <input disabled name="username" value="<%= current.username %>">
@@ -26,7 +26,7 @@
     <% } %>
     <% if( userlevel == 110){ %> 
             <% currents.forEach(current => {%>
-                <form class="updatepassword">
+                <form class="updatepassword" action="/dashborad/user/<%= current.id %>">
                         <input type="hidden" name="idpassword" value="<%= current.id %>">
                         <label for="password">passphrase</label>
                         <input type="password" name="passphrase">

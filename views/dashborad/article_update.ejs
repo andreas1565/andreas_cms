@@ -2,9 +2,8 @@
 <% include partials/dashborad_header.ejs %>
 <main id="main">
     <h1>updater article</h1>
-    <form class="update create" enctype="multipart/form-data">
-        <% currents.forEach(current => {%>
-        <input type="hidden" name="id" value="<%=current.id%>" >    
+    <% currents.forEach(current => {%>
+    <form class="update create" action="/dashborad/article/<%= current.id %>" enctype="multipart/form-data">  
         <label for="title">navnet på title</label>
         <input type="text" name="title" value="<%= current.title %>">
         <img src="/media/<%= current.image %>" class="profileImage"  alt="">
@@ -21,7 +20,7 @@
         <!--ternary operator-->
         <select name="menu" style="display:block">
             <%  menus.forEach( menu => { %>
-                <option value="0">vælg et menupunkt</option>
+                <option value="0" disabled  hidden>vælg et menupunkt</option>
             <option value="<%= menu.id %>" <%= (current.fk_menu==menu.id ? 'selected' : '' ) %>>
                 <%=   menu.name %>
             </option>
@@ -29,7 +28,7 @@
         </select>
         <button type="submit">oprat menu punkt</button>
         <p class="errorMessage"></p>
-        <p class="message" style="color: green"></p>
+        <p class="message"></p>
         <%}); %>
     </form>
 </main>

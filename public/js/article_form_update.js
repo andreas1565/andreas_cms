@@ -38,16 +38,17 @@ document.addEventListener('DOMContentLoaded', () =>{
 
     
             const form = document.querySelector('.update');
+            const endpoint = form.getAttribute('action');
+            console.log(endpoint);
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
                 if(validate(event.target) === true){
-                fetch('/dashborad/article/', {
+                fetch(endpoint, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        id: this.id.value,
                         title: this.title.value,
                         description: this.description.value,
                         menu: this.menu.value

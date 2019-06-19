@@ -188,8 +188,8 @@ module.exports = function(app){
         }
        
     }); */
-    app.patch('/dashborad/article/',  [checkrole.admins, checkrole.superadmins, checkrole.moderators], function (req, res) {
-        let id = req.fields.id;
+    app.patch('/dashborad/article/:id',  [checkrole.admins, checkrole.superadmins, checkrole.moderators], function (req, res) {
+        let id = req.params.id;
         req.session.fetback = 'du har opdatert en artikle';
         let success = true;
 		let errorMessage;

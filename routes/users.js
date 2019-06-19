@@ -86,8 +86,8 @@ module.exports = function (app) {
         
     });
 
-    app.patch('/dashborad/users/', [checkrole.admins, checkrole.superadmins], function (req, res) {
-            let id = req.fields.id;
+    app.patch('/dashborad/users/:id', [checkrole.admins, checkrole.superadmins], function (req, res) {
+            let id = req.params.id;
             req.session.fetback = 'du har nye opdater en da din brugers roler';
             let success = true;
             let errorMessage = [];  
@@ -144,8 +144,8 @@ module.exports = function (app) {
         });
     });
      /*------------------------------ get single user so they can change password end -------------------------------------------------------------------------------------*/
-     app.patch('/dashborad/user', [checkrole.admins, checkrole.superadmins, checkrole.moderators], function (req, res) {
-        let idpassword = req.fields.idpassword;
+     app.patch('/dashborad/user/:id', [checkrole.admins, checkrole.superadmins, checkrole.moderators], function (req, res) {
+        let id = req.params.id;
         let success = true;
         let errorMessage;
         /* here i am making a  sesion text for the fetback sesion*/ 
@@ -161,7 +161,7 @@ module.exports = function (app) {
         }
         if(success){
             let hashedpassphrase = bcrypt.hashSync(req.fields.passphrase, 10);
-            db.query('UPDATE users SET passphrase = ?  WHERE id = ?', [hashedpassphrase, idpassword], function (err, results) {
+            db.query('UPDATE users SET passphrase = ?  WHERE id = ?', [hashedpassphrase, id], function (err, results) {
                 if (err) {
                     throw err;
                 }
