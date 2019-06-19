@@ -1,8 +1,9 @@
 const db = require('../config/mysql')();
 const bcrypt = require('bcryptjs');
+const checkrole = require('../middleware/role-check');
 module.exports = function (app) {
      /*------------------------------ //delete session this route rote is for delte a  session  fetback---------------------------------------------------*/  
-   app.get('/dashborad/dashborad/users/session', (req,res) =>{   
+   app.get('/dashborad/dashborad/users/session',  [checkrole.admins, checkrole.superadmins, checkrole.moderators], (req,res) =>{   
     let fetback;
     delete req.session.fetback;
     db.query(`SELECT users.id, users.username, users.passphrase, roles.name AS usersrole
@@ -16,7 +17,7 @@ module.exports = function (app) {
    });
     /*------------------------------ this route rote is for delte a  session  fetback end---------------------------------------------------*/ 
     /*------------------------------//select all users  select all users --------------------------------------------------------------------------------*/
-    app.get('/dashborad/users', (req, res) => {
+    app.get('/dashborad/users', [checkrole.admins, checkrole.superadmins, checkrole.moderators], (req, res) => {
         let fetback;
         if (typeof req.session.fetback !== 'undefined') {
             //makeingfetback session
@@ -36,7 +37,7 @@ module.exports = function (app) {
 
     /*------------------------------//update  users  update  users -------------------------------------------------------------------------------------*/
 
-    app.get('/dashborad/users/:id', function (req, res) {
+    app.get('/dashborad/users/:id', [checkrole.admins, checkrole.superadmins], function (req, res) {
         
         let dangermessage = 'du har ikke de rigtige level til at redigere bruger roler';
         let id = req.params.id;
@@ -73,7 +74,7 @@ module.exports = function (app) {
                     });
                 });  
             }else{
-                db.query('SELECT * FROM users',  (err, results) =>{
+                db.query('SELECT * FROM users', [checkrole.admins, checkrole.superadmins],  (err, results) =>{
                     if(err){
                         throw err;
                     }
@@ -85,7 +86,7 @@ module.exports = function (app) {
         
     });
 
-    app.patch('/dashborad/users/', function (req, res) {
+    app.patch('/dashborad/users/', [checkrole.admins, checkrole.superadmins], function (req, res) {
             let id = req.fields.id;
             req.session.fetback = 'du har nye opdater en da din brugers roler';
             let success = true;
@@ -111,7 +112,7 @@ module.exports = function (app) {
             }
     });
     /*------------------------------ delete users -------------------------------------------------------------------------------------*/
-    app.delete('/dashborad/users/:id', function (req, res) {
+    app.delete('/dashborad/users/:id', [checkrole.admins, checkrole.superadmins], function (req, res) {
         let id = req.params.id;
         db.query(`SELECT users.id, users.username, users.passphrase, roles.name AS usersrole, roles.level AS \`level\`
         FROM users
@@ -124,7 +125,7 @@ module.exports = function (app) {
                 res.redirect('/dashborad');
             } else { 
                 let id = req.params.id;
-                db.query(`DELETE FROM users WHERE id = ?`, [id], function (err, data) {
+                db.query(`DELETE FROM users WHERE id = ?`, [id], [checkrole.admins, checkrole.superadmins], function (err, data) {
                     if (err) throw err;
                     res.status(200);
                     res.end();
@@ -135,7 +136,7 @@ module.exports = function (app) {
         });
     });
      /*------------------------------ get single user so they can change password -------------------------------------------------------------------------------------*/
-     app.get('/dashborad/user/change/password/:id', function (req, res) {
+     app.get('/dashborad/user/change/password/:id', [checkrole.admins, checkrole.superadmins, checkrole.moderators], function (req, res) {
         let id = req.params.id;
         db.query('SELECT * FROM users WHERE id =  ?', [id], function (err, results) {
             if (err) throw err;
@@ -143,7 +144,7 @@ module.exports = function (app) {
         });
     });
      /*------------------------------ get single user so they can change password end -------------------------------------------------------------------------------------*/
-     app.patch('/dashborad/user', function (req, res) {
+     app.patch('/dashborad/user', [checkrole.admins, checkrole.superadmins, checkrole.moderators], function (req, res) {
         let idpassword = req.fields.idpassword;
         let success = true;
         let errorMessage;

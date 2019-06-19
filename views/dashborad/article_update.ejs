@@ -4,7 +4,7 @@
     <h1>updater article</h1>
     <form class="update create" enctype="multipart/form-data">
         <% currents.forEach(current => {%>
-            <input type="hidden" name="id" value="<%=current.id%>" >    
+        <input type="hidden" name="id" value="<%=current.id%>" >    
         <label for="title">navnet på title</label>
         <input type="text" name="title" value="<%= current.title %>">
         <img src="/media/<%= current.image %>" class="profileImage"  alt="">
@@ -33,7 +33,7 @@
         <%}); %>
     </form>
 </main>
-<script src="/js/article_form_update.js"></script>
+ <script src="/js/article_form_update.js"></script>
 <script>
 /*     const form = document.querySelector('.update');
     form.addEventListener('submit', function (event) {
