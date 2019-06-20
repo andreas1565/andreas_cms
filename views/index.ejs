@@ -11,34 +11,52 @@
 </head>
 
 <body>
-    <main>
-        <header class="client">
-            <nav>
-                <ul>
-                    <% menuresults.forEach(menuresult => { %>
+    <header>
+        <section class="top-header">
+            <img src="/media/Just_Dance_logo.png" alt="logo">
+            <div class="header-login">
+                <li><a href="/login">log ind</a></li>
+            </div>
+        </section>
+        <nav id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" title="åbenmenu" class="closebtn closeNav">&times;</a>
+            <ul>
+                <% menuresults.forEach(menuresult => { %>
                     <li><a href="/category/<%= menuresult.id %>"> <%= menuresult.name %></a></li>
                     <% }); %>
-                    <li><a href="/login">log på</a></li>
                 </ul>
-            </nav>
-        </header>
-
-    </main>
-
-    <section>
-        <% results.forEach(result => { %>
-        <h3>
-            <%= result.title %>
-        </h3>
-        <img src="/media/<%= result.image %>"  alt="">
-        <p>
-            <%= result.description %>
-        </p>
-       
-        <% }); %>
-    </section>
-    <script>
+            </ul>
+        </nav>
+        <span style="font-size:30px;cursor:pointer" title="luk menu" class="opennav">&#9776;</span>
     
+    </header>
+            
+    <main>
+            <section class="maincontent">
+                    <% results.forEach(result => { %>
+                    <img src="/media/<%= result.image %>"  alt="">
+                    <article>
+                        <h3>
+                            <%= result.title %>
+                        </h3>
+                        <p>
+                            <%= result.description %>
+                        </p>
+                       
+                    </article>
+                    <% }); %>
+                </section>
+    </main>
+    <script>
+    var mySidenav = document.querySelector('#mySidenav');
+        var  openNav = document.querySelector('.opennav').addEventListener('click', openNav);
+        var closeNav = document.querySelector('.closeNav').addEventListener('click', closeNav);
+        function openNav() {
+            document.querySelector("#mySidenav").style.width = "100%";
+        }
+        function closeNav() {
+            document.querySelector("#mySidenav").style.width = "0";
+        };
     </script>
 </body>
 
