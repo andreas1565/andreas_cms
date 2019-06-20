@@ -3,304 +3,85 @@
     padding: 0;
     box-sizing: border-box;
 }
-/*header*/
-header{
-    width: 100%;
-    background-color: #000;
+body{
+    margin: 0;
+    background-color: #f3f0f1;
 }
-.client nav{
-display: flex;
+/*-----------------------------------------------header------------------------------------------------------------------------------------*/
+.top-header{
+    display: flex;
+    justify-content: flex-end;
 }
-.client nav ul li{
- list-style: none;
- display: inline-block;
- margin: 0px 20px;
-}
-.client nav ul  li a{
- text-decoration: none;
- color: #fff;
-}
-
-body {
-    font-family: "Arial", Serif;
-    background-color: darkgray;
-    overflow-x: hidden;
-}
-
-.navbar {
-    background-color: #3b5998;
-    overflow: hidden;
-    height: 63px;
-}
-
-.navbar a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-.navbar ul {
-    margin: 8px 0 0 0;
+.top-header li {
     list-style: none;
 }
-
-.navbar a:hover {
-    background-color: #ddd;
-    color: #000;
+.header-login{
+ margin: auto 0 auto 0;
 }
-
-.side-nav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    opacity: 0.9;
-    overflow-x: hidden;
-    padding-top: 60px;
-    transition: 0.5s;
-}
-
-.side-nav a {
-    padding: 10px 10px 10px 30px;
+.header-login  li a{
+    color: black;
     text-decoration: none;
-    font-size: 22px;
-    color: #ccc;
-    display: block;
-    transition: 0.3s;
+    padding-right: 10px;
 }
 
-.side-nav a:hover {
-    color: #fff;
-}
-
-.side-nav .btn-close {
-    position: absolute;
-    top: 0;
-    right: 22px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-#main {
-    transition: margin-left 0.5s;
-    padding: 20px;
-    overflow: hidden;
-    width: 100%;
-}
-.images{
+header img{
+    height: 12vh;
     width: auto;
-    height: 40px;
+    margin: auto;
 }
+/* Navigation */
 
-@media(max-width:568px) {
-    .navbar-nav {
-        display: none
-    }
+  .closebtn{
+    display: none;
+  }
+  .opennav{
+    display: none;
+  }
+nav{
+    background-color: #617370;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
 }
-
-@media(min-width:568px) {
-    /*.open-slide{display:none}*/
-}
-
-/*tabel*/
-table {
-    width: 100%;
-    margin: 0 auto;
-}
-
-tr {
+nav ul{
     display: flex;
+    justify-content: space-around;
 }
-
-th,
-td {
-    flex: 1;
-    text-align: left;
+nav li{
+    list-style: none;
+    padding: 0.7em;
 }
-
-.button {
+nav a{
+    font-size: 20px;
+    padding: 0.7em;
     text-decoration: none;
-    background-color: #4CAF50;
-    border: none;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    margin-left: 80%;
-    margin-top: 1%;
 }
-/*update box delete button*/
-#uploadfield{
-    background: #F00;
+nav a:hover{
+    color: lightblue;
 }
-.deletebox{
-position: fixed;
-top: 50%;
-left: 40%;
-width: 30%;
-height: 30vh;
-z-index: 999;
-transform: translate(-50%, -50%);
-border: solid 1px #000;
-text-align: center;
-display: none;
-}
-.updatebox{
-position: fixed;
-top: 50%;
-left: 40%;
-width: 30%;
-height: 30vh;
-z-index: 999;
-transform: translate(-50%, -50%);
-border: solid 1px #000;
-text-align: center;
-display: none;
-}
-.delete{
-background: #f00;
-color: #fff;
-}
-.updatebtn{
-border: none;
-padding: 15px 32px;
-text-align: center;
-font-size: 16px;
-margin: 4px 2px;
-cursor: pointer;
-background: #00f;
-color: #fff;  
-}
-.button-extra{
-border: none;
-padding: 15px 32px;
-text-align: center;
-font-size: 16px;
-margin: 4px 2px;
-cursor: pointer;
-}
+/*-----------------------------------------------header end------------------------------------------------------------------------------------*/
 
-#uploadbutton{
-    position: relative;
-}
-
-#uploadbutton>figure{
-    position: absolute;
-    height: 3em;
-    padding: calc(1em) 2.5em 0;
-    background: #F55;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-}
-
-#uploadbutton>input{
-    opacity: 0;
-    cursor: pointer;
-}
-
-#updatemessage{
-    background: #0F0;
-    padding: 1em;
-    border-radius: 2em;
-    margin-top: 1%;
-}
-
-#updatemessage a{
-    float: right;
-    cursor: pointer;
-    margin-right: 1em;
-    color: #f00;
-    text-decoration: none;
-}
-.errorMessage{
-    color: #f00;
-}
-
-.deletebtn{
-    color: #f00;
-}
-.deletebtn:hover{
-    color: #f00;
-}
-
-@media screen and (max-width: 800px) {
-    .button {
-        margin-left: 60%;
-    }
-}
-@media screen and (max-width: 500px) {
-    .button {
-        padding: 15px 25px;
-        margin-left: 50%;
-    }
-}
-@media screen and (max-width: 320px) {
-    .button {
-        padding: 10px 20px;
-        margin-left: 50%;
-        margin: 1px 1px;
-    }
-    td {
-    text-align: center;
-}
-}
-/* form create the dashborad content*/
-.create label{
-    text-align: center;
+/*-----------------------------------------------main content------------------------------------------------------------------------------------*/
+.maincontent article{
+    width:24.80%;
     display: block;
-    margin-bottom: 2%;
+    border: 1px solid rgb(165, 163, 163);
+    border-top: 0px solid;
+    margin: 0 auto;
+    height: 40vh;
+    margin-bottom: 10%;
+    text-align: center;
+    line-height: 40px;
 }
-.create input{
-    width: 80%;
-    padding: 12px 20px;
-     margin: 8px 0;
-    display: block;
+.maincontent img{
+    width: 300px;
+    height: auto;
     margin: 0  auto;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; 
-}
-.create select{
-    margin: 0 auto;
-    margin-bottom: 2%;
-}
-#uploadfield{
-   border: none; 
-   display: block;
-   margin: 0 auto;
-   margin-bottom: 2%;
-}
-.create button{
+    margin-top: 5%;
     display: block;
-    padding: 15px 30px;
-    margin: 0 auto;
-    margin-bottom: 2%;
-}
-.create textarea{
-    resize: none;
-    height: 6em;
-    width: 50%;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    display: block;
-    background-color: white;
-    border: none;
-    font-size: 1.2em;
 }
 
+/*-----------------------------------------------main content end------------------------------------------------------------------------------------*/
 /*----------------------------------------------for the login form---------------------------------------------------------------------------------------------------*/
 #login{
     display: flex;
@@ -310,9 +91,13 @@ cursor: pointer;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 50%;
     padding-bottom: 1rem;
-    
+    margin-top: 30px;
+    }
+    #login button{
+        width: 50%;
+        padding: 10px 10px;
     }
     form label{
     font-size: 0.9rem;
@@ -324,12 +109,149 @@ cursor: pointer;
         width: 50%;;
         padding: 12px 20px;
         margin: 8px 0;
-    
     }
     #login section{
     width: 50%;
+    margin-top: 65px;
     }
     section h3, p {
     color: #000;
     }
-/*----------------------------------------------for the login form end----------------------------------------------------------------------------------------------*/
+/*----------------------------------------------for the login form end----------------------------------------------------------------------------------------------*/	
+@media screen and (max-width:2560px){
+        header img{
+                 margin-right:43%;
+        }
+}
+
+@media screen and (max-width:1440px){
+header img{
+         margin-right:39%;
+}
+
+
+
+}
+ @media screen and (max-width:1024px){
+        header img{
+                margin-right:35%;
+       }
+
+}
+@media screen and (max-width:768px){
+        header img{
+                margin-right:31%;
+       }
+
+
+
+}
+@media screen and (max-width:425px){
+        header img{
+                margin-right:8%;
+       }
+
+
+}
+@media screen and (max-width:375px){
+
+        header img{
+                margin-right:7%;
+       }
+
+}
+
+
+
+@media screen and (max-width:500px){
+.sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 6;
+        top: 0;
+        left: 0;
+        background-color: #617370;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+        text-align:center;
+}
+      
+.sidenav li a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: white;
+        display: block;
+        transition: 0.3s;
+        position: relative;
+        right: 15px;
+      
+}
+      
+.sidenav a:hover{
+        color: #f1f1f1;
+}
+      
+.sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+}
+.closebtn{
+        display: block;
+        color: #fff;
+        margin-right: 50px;
+}
+.opennav{
+        display: block;
+}
+nav ul li{
+        list-style: none;
+        display: block; 
+        margin-left: 0%;
+}
+nav ul {
+        margin-left: 0%;
+        flex-direction: column;
+}
+nav ul a{
+        margin-left: 0%;
+}
+}
+@media screen and (max-width:500px){
+    #login{
+        display: block;
+    }
+    #login form{
+        width: 100%;
+    }
+    #login form input{
+        width: 70%;
+    }
+    #login section{
+        width: 100%;
+        opacity: 0;
+    }
+}
+@media screen and (max-width:380px){
+    #login{
+        display: block;
+    }
+    #login form{
+        width: 100%;
+    }
+    #login form input{
+        width: 70%;
+    }
+    #login{
+        width: 100%;
+    }
+    #login section{
+        width: 100%;
+        opacity: 0;
+    }
+}

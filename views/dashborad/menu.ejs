@@ -1,5 +1,6 @@
 <% include partials/dashborad_head.ejs %>
 <% include partials/dashborad_header.ejs %>
+<main id="main">
 <table>
         <% if(typeof fetback != 'undefined'){ %>
             <p id="updatemessage">
@@ -12,7 +13,10 @@
 
             </th>
             <th>
-                name
+                navn på menu punkt
+            </th>
+            <th>
+                position af dit menu punkt
             </th>
         </tr>
     </thead>
@@ -33,7 +37,9 @@
             <td>
                 <%= result.name %>
             </td>
-
+            <td>
+                <%= result.postion %>
+            </td>
         </tr>
         <% }); %>
     </tbody>

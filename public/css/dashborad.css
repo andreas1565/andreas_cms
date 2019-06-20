@@ -1,0 +1,329 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Arial", Serif;
+    background-color: darkgray;
+    overflow-x: hidden;
+}
+.navbar {
+    background-color: #3b5998;
+    overflow: hidden;
+    height: 8.725761772853186vh;
+}
+#icon{
+    font-size: 1.875em;
+    margin-top: 0.2em;
+}
+.navbar  a {
+    display: block;
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 17px;
+    margin-top: 0.5em;
+}
+.navbar li{
+    list-style: none;
+    margin-left: 2%;
+}
+
+.navbar ul{
+    display: flex;
+}
+.side-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    opacity: 0.9;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+    display: flex;
+}
+.side-nav nav ul{
+  width: 50%;
+}
+.side-nav li a {
+    padding: 10px 10px 10px 30px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #ccc;
+    display: block;
+    transition: 0.3s;
+}
+.side-nav section{
+   width: 50%;
+}
+
+.side-nav section p{
+    color: #fff;
+    margin-top: 14%;
+}
+.side-nav section  img{
+    width: 80px;
+    height: auto;
+    display: block;
+    margin-left: 30px;
+    position: relative;
+    top: 20px;
+    border-radius: 40px;
+}
+.side-nav a:hover {
+    color: #fff;
+}
+
+.side-nav .btn-close {
+    position: absolute;
+    top: 0;
+    right: 22px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left 0.5s;
+    padding: 20px;
+    overflow: hidden;
+    width: 100%;
+}
+.images{
+    width: auto;
+    height: 40px;
+}
+
+@media(max-width:568px) {
+    .navbar-nav {
+        display: none
+    }
+    .side-nav{
+        display: block;
+    }
+    .side-nav nav ul{
+        width: 100%;
+    }
+    .side-nav section{
+        width: 100%;
+    }
+    .side-nav section p{
+        margin-top: 5%;
+        margin-left: 20px;
+    }
+    .side-nav section  img{
+        position: static;
+        top: 0px;
+        left: 0px;
+        margin-top: 5%;
+        margin-left: 20px;
+    }
+}
+
+
+/*tabel*/
+table {
+    width: 100%;
+    margin: 0 auto;
+}
+
+tr {
+    display: flex;
+}
+
+th,
+td {
+    flex: 1;
+    text-align: left;
+}
+
+.button {
+    text-decoration: none;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left: 80%;
+    margin-top: 1%;
+}
+/*update box delete button*/
+#uploadfield{
+    background: #F00;
+}
+.deletebox{
+position: fixed;
+top: 50%;
+left: 40%;
+width: 30%;
+height: 30vh;
+z-index: 999;
+transform: translate(-50%, -50%);
+border: solid 1px #000;
+text-align: center;
+display: none;
+}
+.updatebox{
+position: fixed;
+top: 50%;
+left: 40%;
+width: 30%;
+height: 30vh;
+z-index: 999;
+transform: translate(-50%, -50%);
+border: solid 1px #000;
+text-align: center;
+display: none;
+}
+.delete{
+background: #f00;
+color: #fff;
+}
+.updatebtn{
+border: none;
+padding: 15px 32px;
+text-align: center;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+background: #00f;
+color: #fff;  
+}
+.button-extra{
+border: none;
+padding: 15px 32px;
+text-align: center;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
+
+#uploadbutton{
+    position: relative;
+}
+.change{
+    text-decoration: none;
+    color: darkblue;
+}
+
+#uploadbutton>figure{
+    position: absolute;
+    height: 3em;
+    padding: calc(1em) 2.5em 0;
+    background: #F55;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+#uploadbutton>input{
+    opacity: 0;
+    cursor: pointer;
+}
+
+#updatemessage{
+    background: #0F0;
+    padding: 1em;
+    border-radius: 2em;
+    margin-top: 1%;
+}
+
+#updatemessage a{
+    float: right;
+    cursor: pointer;
+    margin-right: 1em;
+    color: #f00;
+    text-decoration: none;
+}
+.errorMessage{
+    color: #f00;
+}
+
+.deletebtn{
+    color: #f00;
+}
+.deletebtn:hover{
+    color: #f00;
+}
+
+@media screen and (max-width: 800px) {
+    .button {
+        margin-left: 60%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .button {
+        padding: 15px 25px;
+        margin-left: 50%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .button {
+        padding: 10px 20px;
+        margin-left: 50%;
+        margin: 1px 1px;
+    }
+    td {
+    text-align: center;
+}
+}
+/* form create the dashborad content*/
+.create label{
+    text-align: center;
+    display: block;
+    margin-bottom: 2%;
+}
+.create input{
+    width: 30%;
+    padding: 12px 20px;
+    display: block;
+    margin: 0  auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+}
+.create select{
+    margin: 0 auto;
+    margin-bottom: 2%;
+}
+#uploadfield{
+   border: none; 
+   display: block;
+   margin: 0 auto;
+   margin-bottom: 2%;
+}
+.create button{
+    display: block;
+    padding: 10px 10px;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 2%;
+}
+.create textarea{
+    resize: none;
+    height: 6em;
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    display: block;
+    background-color: white;
+    border: none;
+    font-size: 1.2em;
+}
+.create img{
+    width: 200px;
+    height: auto;
+    margin: 0  auto;
+    display: block;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}

@@ -5,6 +5,7 @@
     <p id="updatemessage">
         <%= (typeof fetback != 'undefined')? fetback: '' %> <a href="/dashborad/dashborad/users/session">X</a></p>
     <% } %>
+    <a href="/dashborad/user/change/password/<%= profileID %>" class="change">opdater password</a>
     <table>
         <thead>
             <tr>
@@ -18,9 +19,6 @@
                 </th>
                 <th>
                     brugerroller
-                </th>
-                <th>
-                    <a href="/dashborad/user/change/password/<%= profileID %>">opdater password</a>
                 </th>
             </tr>
         </thead>

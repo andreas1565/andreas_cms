@@ -26,8 +26,7 @@
     <% } %>
     <% if( userlevel == 110){ %> 
             <% currents.forEach(current => {%>
-                <form class="updatepassword" action="/dashborad/user/<%= current.id %>">
-                        <input type="hidden" name="idpassword" value="<%= current.id %>">
+                <form class="updatepassword create" action="/dashborad/user/<%= current.id %>">
                         <label for="password">passphrase</label>
                         <input type="password" name="passphrase">
                         <label for="password">repeatpassphrase</label>
