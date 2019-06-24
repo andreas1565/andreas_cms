@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 25. 01 2019 kl. 17:50:06
+-- Genereringstid: 24. 06 2019 kl. 11:21:01
 -- Serverversion: 10.1.30-MariaDB
 -- PHP-version: 7.2.1
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `article` (
-  `id` int(11) NOT NULL,
+  `id` tinyint(4) NOT NULL,
   `title` varchar(15) NOT NULL,
   `image` varchar(126) NOT NULL,
   `description` text NOT NULL,
@@ -41,15 +41,8 @@ CREATE TABLE `article` (
 --
 
 INSERT INTO `article` (`id`, `title`, `image`, `description`, `fk_menu`) VALUES
-(42, 'hej', '1548405468179adult-beach-beard-736716.jpg', ' hej      \r\n        ', 10),
-(43, 'hej', '1548405824284girl-919048_640.jpg', '             jijsiwij            \r\n         \r\n        ', 11),
-(44, 'jeg', '1548410870690girl-919048_640.jpg', '              jeg           \n         \n        ', 11),
-(45, 'andreas', '1548418993308girl-919048_640.jpg', '             \r\n andreas       ', 11),
-(46, 'hej', '1548419235088girl-919048_640.jpg', '  mmkeke', 10),
-(47, 'hej', '1548419297846girl-919048_640.jpg', '    jjdii         \r\n        ', 10),
-(48, 'hej', '1548419343552girl-919048_640.jpg', ' nsj            \r\n        ', 10),
-(49, 'hej', '1548419414540beautiful-1274056_640.jpg', '  jijiwjw           \r\n        ', 10),
-(50, 'hej', '1548419442786beautiful-1274056_640.jpg', '  jijiwjw           \r\n        ', 10);
+(64, 'hej', '1560848289674_iphone-410324_640.jpg', 'heje    \n        ', 17),
+(65, 'test2', '1560854508851mobile-phone-1917737_640.jpg', 'test2          \n        ', 17);
 
 -- --------------------------------------------------------
 
@@ -58,7 +51,7 @@ INSERT INTO `article` (`id`, `title`, `image`, `description`, `fk_menu`) VALUES
 --
 
 CREATE TABLE `menu` (
-  `id` int(11) NOT NULL,
+  `id` tinyint(4) NOT NULL,
   `name` varchar(15) NOT NULL,
   `postion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -68,8 +61,31 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`id`, `name`, `postion`) VALUES
-(10, 'hej', 1),
-(11, 'articel', 2);
+(17, 'test2', 2),
+(18, 'test6', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur-dump for tabellen `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` tinyint(4) NOT NULL,
+  `name` varchar(15) NOT NULL,
+  `level` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Data dump for tabellen `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `level`) VALUES
+(6, 'super admin', 110),
+(7, 'admin', 100),
+(8, 'moderator', 75),
+(9, 'user', 25),
+(10, 'guest', 0);
 
 -- --------------------------------------------------------
 
@@ -78,17 +94,21 @@ INSERT INTO `menu` (`id`, `name`, `postion`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(60) NOT NULL,
-  `passphrase` varchar(78) NOT NULL
+  `id` tinyint(4) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `passphrase` varchar(76) NOT NULL,
+  `roles_id` tinyint(4) NOT NULL,
+  `photos` varchar(126) DEFAULT 'default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Data dump for tabellen `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `passphrase`) VALUES
-(1, 'admin', '1234');
+INSERT INTO `users` (`id`, `username`, `passphrase`, `roles_id`, `photos`) VALUES
+(30, 'admin', '$2a$10$jBFhy.A7aN5oZfOgaokXi.KBT8QPqxfCnVpJvepMB3sWz.XFQfD3.', 6, '1561361843260_binary2-1327493_640.jpg'),
+(32, 'test', '$2a$10$Qxx/OzNxuj.36ls8Sg1e2.ikxaP5zffBWqBQhwYTPmnlRkHlQ6xga', 7, '1561366633901_mobile-phone-1917737_640.jpg'),
+(34, 'test3', '$2a$10$E5eLHndyatV6eWpHDXyQJuxAbbw.yCj496ipw6gsNM.mZZu0KAGfW', 8, 'default.jpg');
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -107,6 +127,12 @@ ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks for tabel `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks for tabel `users`
 --
 ALTER TABLE `users`
@@ -120,19 +146,19 @@ ALTER TABLE `users`
 -- Tilføj AUTO_INCREMENT i tabel `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
--- Tilføj AUTO_INCREMENT i tabel `menu`
+-- Tilføj AUTO_INCREMENT i tabel `roles`
 --
-ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `roles`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
