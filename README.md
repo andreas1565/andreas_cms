@@ -45,8 +45,11 @@ i den udgave er der gjort fous på dashbord og de bruger der kan komme på den d
 
 # et eksemple på en dot env fil
 DB_USER=root
+
 DB_PSWD=
+
 DB_HOST=localhost
+
 DB_DTBS=news
 
 PORT=1337
