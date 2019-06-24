@@ -12,34 +12,34 @@ sådan gøres det:
 
 .for at lave et nyt route så gå ind på mappen routes og skiv noget i main.js eller lave en ny fil viser eksempel på route nederst i dokumentationen
 ## Lise over  npm pakker
-*Dotenv er et modul der sørger for at vi kan bruge .env, så alle database informationer ikke står i en fil. Hvis man bliver hacket, kan hackeren ikke se database informationerne mere.
+* Dotenv er et modul der sørger for at vi kan bruge .env, så alle database informationer ikke står i en fil. Hvis man bliver hacket, kan hackeren ikke se database informationerne mere.
 
-*Ejs står for Embedded JavaScript templating, som gør at vi kan dele html elementet op i partials. det er også en template engine.
+* Ejs står for Embedded JavaScript templating, som gør at vi kan dele html elementet op i partials. det er også en template engine.
 
-*Express er et framework til node js, det er til at lave webapplikationer,  og her bruger vi det til at lave en         web-server.
+* Express er et framework til node js, det er til at lave webapplikationer,  og her bruger vi det til at lave en         web-server.
 
-*Express-sestion er et middleware til Express som gør at vi kan log-in på en side.
+* Express-sestion er et middleware til Express som gør at vi kan log-in på en side.
 
-*Run-script-er os en sikring af at man sammen med start script dev script dev:win32 script dev:linux: script
+* Run-script-er os en sikring af at man sammen med start script dev script dev:win32 script dev:linux: script
 *dev:darwin script i package.json så man kan køre npm run dev npm start på Windows Linux Mac. 
 
-*Debug, det gør at man i sin kode kan skive console.log() og slå dem til og fra. 
+* Debug, det gør at man i sin kode kan skive console.log() og slå dem til og fra. 
 
-*Mysql, det gør at man kan tilknytte en databasen. 
+* Mysql, det gør at man kan tilknytte en databasen. 
 
-*Morgan, den logger hvilket rout du er på, med en status kode og timestamp.
+* Morgan, den logger hvilket rout du er på, med en status kode og timestamp.
 
-*nodemon er et værktøj som gør at serveren kan genstarte sig selv automatisk.
+* nodemon er et værktøj som gør at serveren kan genstarte sig selv automatisk.
 
-*Express-formidable er et modul der gør det mugligt at upload filer.
+* Express-formidable er et modul der gør det mugligt at upload filer.
 
-*bcryptjs er for at hash password så hvis man bliver hacket at hackerne ikke kan se password og skal bruge extra tid på at finde ud af hvad password er.
+* bcryptjs er for at hash password så hvis man bliver hacket at hackerne ikke kan se password og skal bruge extra tid på at finde ud af hvad password er.
 ## burger brugernavn og adgangskoder
 brugernavn admin  adgangskoder 1234 brugerrole  super admin
 
-brugernavn test adgangskoder test admin
+brugernavn test adgangskoder test brugerrole admin
 
-brugernavn test3 adgangskoder test3 moderator
+brugernavn test3 adgangskoder test3 brugerrole moderator
 
 i den udgave er der gjort fous på dashbord og de bruger der kan komme på den der er  ikke lavet noget til user og gæest
 
