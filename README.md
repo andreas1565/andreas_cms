@@ -12,9 +12,6 @@ sådan gøres det:
 
 .for at lave et nyt route så gå ind på mappen routes og skiv noget i main.js eller lave en ny fil viser eksempel på route nederst i dokumentationen
 ## Lise over  npm pakker
-*body-parser:
-Body-parser er et middleware som vi bruger til at fortolke hvad vi indtaster i en formular. De ting der indtastes i en formular skal fortolkes når formularen bliver postet.
-
 *Dotenv er et modul der sørger for at vi kan bruge .env, så alle database informationer ikke står i en fil. Hvis man bliver hacket, kan hackeren ikke se database informationerne mere.
 
 *Ejs står for Embedded JavaScript templating, som gør at vi kan dele html elementet op i partials. det er også en template engine.
@@ -36,7 +33,7 @@ Body-parser er et middleware som vi bruger til at fortolke hvad vi indtaster i e
 
 *Express-formidable er et modul der gør det mugligt at upload filer.
 
-*cors er et node Modul der gør det muligt at give andre domæner adgang til ens domænes indhold, default er at man ikke kan 
+*bcryptjs er for at hash password så hvis man bliver hacket at hackerne ikke kan se password og skal bruge extra tid på at finde ud af hvad password er.
 ## burger brugernavn og adgangskoder
 brugernavn admin  adgangskoder 1234 brugerrole  super admin
 
