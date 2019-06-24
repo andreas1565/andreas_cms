@@ -37,6 +37,15 @@ Body-parser er et middleware som vi bruger til at fortolke hvad vi indtaster i e
 *Express-formidable er et modul der gør det mugligt at upload filer.
 
 *cors er et node Modul der gør det muligt at give andre domæner adgang til ens domænes indhold, default er at man ikke kan 
+## burger brugernavn og adgangskoder
+brugernavn admin  adgangskoder 1234 brugerrole  super admin
+
+brugernavn test adgangskoder test admin
+
+brugernavn test3 adgangskoder test3 moderator
+
+i den udgave er der gjort fous på dashbord og de bruger der kan komme på den der er  ikke lavet noget til user og gæest
+
 ## Projektbeskrivelse
 .jeg  har skulle lave min egen kodebase som jeg kan bruge til fremtidige projekter og så jeg ved hvordan koden virker så jeg ikke har en serverfil som fylder for mange linier
 ## kommandor
