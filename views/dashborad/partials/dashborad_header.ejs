@@ -14,7 +14,7 @@
                         <li><a href="/dashborad/users">bruger</a></li>
                 </ul>
                 <section>
-                    <img src="/media/binary-1327493_640.jpg" alt="profile">
+                    <img src="/media/<%= userphotos %>" alt="profile">
                     <% if (typeof username != "undefined"){ %>
                         <p>log på som <%= username %></p>
                         <% } %>
@@ -22,7 +22,7 @@
                             <li role="menuitem"><a href="/login">logpå</a></li>
                             <% } else { %>
                             <li role="menuitem"><a href="/logout">logud</a></li>
-                            <% } %>
+                            <% } %> 
                 </section>
             </nav>
 </header>

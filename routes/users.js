@@ -1,6 +1,7 @@
 const db = require('../config/mysql')();
 const bcrypt = require('bcryptjs');
 const checkrole = require('../middleware/role-check');
+const fs = require('fs');
 module.exports = function (app) {
      /*------------------------------ //delete session this route rote is for delte a  session  fetback---------------------------------------------------*/  
    app.get('/dashborad/dashborad/users/session',  [checkrole.admins, checkrole.superadmins, checkrole.moderators], (req,res) =>{   
@@ -174,4 +175,50 @@ module.exports = function (app) {
         }
         
     });
+
+
+    app.patch('/profile/image/:id', (req, res, next) => {
+        let id = req.params.id;
+		const file = req.files.photo;
+		const renamedFilename = `${Date.now()}_${file.name}`;
+		let success = true;
+		let errorMessage;
+
+		/* console.log(file); */
+		if (file.type.indexOf('image') === -1) {
+			errorMessage = 'du har ikke valgt en korat fil type';
+			success = false;
+		}
+		/* console.log(renamedFilename);
+		console.log(req.files); */
+		if (!success) {
+			res.status(400);
+			res.json({ errorMessage });
+			return;
+		}
+		fs.readFile(file.path, (err, data) => {
+			if (err) return next(`${err} at fs.readFile (${__filename}:35:5)`);
+			fs.writeFile(`./public/media/${renamedFilename}`, data, err => {
+                const sql = 'SELECT photos FROM users  WHERE id = ?';
+                db.query(sql, [req.params.id], (err, results) => {
+                    if(results[0].photos !== 'default.jpg'){
+                        fs.unlink(`./public/media/${results[0].photos}`, function (err, data) {
+                            if (err) throw err
+    
+                        });
+                    }
+                });   
+					if (err) return next(`${err} at db.query (${__filename}:39:9)`);
+					db.query('UPDATE users SET photos = ? WHERE id = ?', [ renamedFilename,id], (err, result) => {
+                        if (err) return next(`${err} at db.query (${__filename}:41:11)`);
+                        res.status(200);
+                        app.locals.userphotos = renamedFilename;
+						res.json({
+							photo: renamedFilename
+						});
+					});
+			});
+		});
+
+	});
 }

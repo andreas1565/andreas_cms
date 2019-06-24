@@ -24,7 +24,7 @@ module.exports = function (app) {
 			errorMessage = 'Et eller flere felter var tomme';
 		}
 		if(success){
-			db.query(`SELECT users.id ,users.username ,users.passphrase, users.roles_id,  roles.level  FROM users 
+			db.query(`SELECT users.id ,users.username ,users.passphrase, users.roles_id,  roles.level, users.photos FROM users 
 			INNER JOIN roles
 			ON users.roles_id = roles.id
 			WHERE username = ?`, [req.fields.username], (err, result) => {
@@ -36,6 +36,7 @@ module.exports = function (app) {
 					if(bcrypt.compareSync(req.fields.passphrase, result[0].passphrase)){
 						req.session.user = result[0].id;
 						app.locals.username = result[0].username;
+						app.locals.userphotos = result[0].photos;
 						app.locals.profileID = result[0].id;
 						req.session.roles_id = result[0].roles_id;
 						req.session.level = result[0].level;
