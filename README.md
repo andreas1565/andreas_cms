@@ -43,6 +43,17 @@ brugernavn test3 adgangskoder test3 brugerrole moderator
 
 i den udgave er der gjort fous på dashbord og de bruger der kan komme på den der er  ikke lavet noget til user og gæest
 
+# et eksemple på en dot env fil
+DB_USER=root
+DB_PSWD=
+DB_HOST=localhost
+DB_DTBS=news
+
+PORT=1337
+SITE_HOST=localhost
+
+max_file_upload=2000000
+
 ## Projektbeskrivelse
 .jeg  har skulle lave min egen kodebase som jeg kan bruge til fremtidige projekter og så jeg ved hvordan koden virker så jeg ikke har en serverfil som fylder for mange linier
 ## kommandor
