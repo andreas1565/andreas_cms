@@ -46,4 +46,27 @@ document.addEventListener('DOMContentLoaded', () =>{
                     })
                 }
             });
+
+            const file = document.querySelector('.profileFileSelect');
+            file.addEventListener('change', function (event) {
+                const imageid = event.target.dataset.imageid
+                const formData = new FormData();
+                formData.append('photo', this.files[0]);
+                fetch(`/profile/image/${imageid}`, {
+                    method: 'PATCH',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.photo) {
+                            const img = document.querySelector('.profileImage');
+					        img.src = `/media/${data.photo}`;
+                        } else {
+                            for(let i = 0; i < data.errorMessage.length; i++){
+                                document.querySelector('.errorMessage').innerHTML +=  `${data.errorMessage[i]}`; 
+                            }
+        
+                        }
+                    });
+            });
 });
