@@ -23,18 +23,18 @@
   "homepage": "https://github.com/andreas1565/andreas_kodebase#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-    "dotenv": "^6.1.0",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4",
+    "body-parser": "^1.19.0",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
     "express-formidable": "^1.2.0",
-    "express-session": "^1.15.6",
+    "express-session": "^1.16.2",
     "morgan": "^1.9.1",
-    "mysql": "^2.16.0"
+    "mysql": "^2.17.1"
   },
   "devDependencies": {
-    "debug": "^4.1.0",
-    "nodemon": "^1.18.6",
-    "run-script-os": "^1.0.3"
+    "debug": "^4.1.1",
+    "nodemon": "^1.19.1",
+    "run-script-os": "^1.0.7"
   }
 }
